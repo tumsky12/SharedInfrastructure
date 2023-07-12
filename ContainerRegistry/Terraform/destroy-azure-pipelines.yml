@@ -8,7 +8,7 @@ variables:
   azServiceConnection: 'terraform-azure-connection'
   backendAzureRmResourceGroupName: 'terraform-prod'
   backendAzureRmStorageAccountName: 'terraformprod1784531786'
-  backendAzureRmContainerName: 'dicebot-tf-storage'
+  backendAzureRmContainerName: 'shared-tf-storage'
   backendAzureRmKey: 'sharedContainerRegistryProd'
 
 stages:
