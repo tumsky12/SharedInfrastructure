@@ -3,13 +3,13 @@ resources:
 
 variables:
   # Terraform
-  terraformWrokingDir : '$(System.DefaultWorkingDirectory)/ContainerRegistry/Terraform'
+  terraformWorkingDir : '$(System.DefaultWorkingDirectory)/ContainerRegistry/Terraform'
   environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
   azServiceConnection: 'terraform-azure-connection'
   backendAzureRmResourceGroupName: 'terraform-prod'
   backendAzureRmStorageAccountName: 'terraformprod1784531786'
   backendAzureRmContainerName: 'shared-tf-storage'
-  backendAzureRmKey: 'sharedContainerRegistryProd'
+  backendAzureRmKey: 'terraform-prod'
 
 stages:
 - stage: Infrastructure
@@ -28,7 +28,7 @@ stages:
       displayName: Terraform Innit
       inputs:
         command: 'init'
-        workingDirectory: $(terraformWrokingDir)
+        workingDirectory: $(terraformWorkingDir)
         backendType: 'azurerm'
         backendServiceArm: $(environmentServiceName)
         backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
@@ -40,12 +40,12 @@ stages:
       displayName: Terraform Validate
       inputs:
         command: 'validate'
-        workingDirectory: $(terraformWrokingDir)
+        workingDirectory: $(terraformWorkingDir)
         allowTelemetryCollection: true
     - task: TerraformCLI@0
       displayName: Terraform Destroy
       inputs:
         command: 'destroy'
-        workingDirectory: $(terraformWrokingDir)
+        workingDirectory: $(terraformWorkingDir)
         environmentServiceName: $(environmentServiceName)
         allowTelemetryCollection: true
