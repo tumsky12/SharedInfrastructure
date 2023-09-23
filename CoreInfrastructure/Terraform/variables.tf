@@ -4,7 +4,7 @@ variable "resource_group_location" {
 }
 
 variable "resource_prefix" {
-  default     = "core"
+  default     = "shared"
   description = "Prefix of the resource."
 }
 

@@ -4,7 +4,7 @@ resources:
 - repo: self
 
 stages:
-- template: ../PipelineTemplates/terraform-apply.yml
+- template: ../PipelineTemplates/terraform-destroy.yml
   parameters:
     displayName: 'Shared Core Infra'
     terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
