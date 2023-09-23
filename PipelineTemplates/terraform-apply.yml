@@ -42,12 +42,12 @@ stages:
       displayName: Terraform Validate
       inputs:
         command: 'validate'
-        workingDirectory: $(terraformWorkingDir)
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
         allowTelemetryCollection: true
     - task: TerraformCLI@0
       displayName: Terraform Apply
       inputs:
         command: 'apply'
-        workingDirectory: $(terraformWorkingDir)
-        environmentServiceName: $(environmentServiceName)
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
+        environmentServiceName: ${{ parameters.environmentServiceName }}
         allowTelemetryCollection: true
