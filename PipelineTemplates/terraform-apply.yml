@@ -1,15 +1,63 @@
 parameters:
-- name: directoryName
-  default: ''
-- name: containerName
-  default: ''
+-name: displayName
+-name: terraformWorkingDir
+-name: backendAzureRmContainerName
+-name: environmentServiceName
+  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+-name: azServiceConnection
+  default: 'terraform-azure-connection'
+-name: backendAzureRmResourceGroupName
+  default: 'terraform-prod'
+-name: backendAzureRmStorageAccountName
+  default: 'terraformprod1784531786'
+-name: backendAzureRmKey
+  default: 'terraform-prod'
 
-variables:
-  # Terraform
-  terraformWrokingDir : '$(System.DefaultWorkingDirectory)/${{ parameters.directoryName }}/Terraform'
-  environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
-  azServiceConnection: 'terraform-azure-connection'
-  backendAzureRmResourceGroupName: 'terraform-prod'
-  backendAzureRmStorageAccountName: 'terraformprod1784531786'
-  backendAzureRmContainerName: ${{ parameters.containerName }}
-  backendAzureRmKey: 'terraform-prod'
+# variables:
+#   # Terraform
+#   terraformWorkingDir : '$(System.DefaultWorkingDirectory)/${{ parameters.directoryName }}/Terraform'
+#   environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+#   azServiceConnection: 'terraform-azure-connection'
+#   backendAzureRmResourceGroupName: 'terraform-prod'
+#   backendAzureRmStorageAccountName: 'terraformprod1784531786'
+#   backendAzureRmContainerName: ${{ parameters.containerName }}
+#   backendAzureRmKey: 'terraform-prod'
+  
+stages:
+- stage: ${{ parameters.displayName }}
+  displayName: Provision ${{ parameters.displayName }}
+  jobs:
+  - job: Install
+    displayName: Install Terraform
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+  # - job: Provision
+  #   displayName: Provision Resources
+  #   steps:
+  #   - task: TerraformCLI@0
+  #     displayName: Terraform Innit
+  #     inputs:
+  #       command: 'init'
+  #       workingDirectory: $(terraformWrokingDir)
+  #       backendType: 'azurerm'
+  #       backendServiceArm: $(environmentServiceName)
+  #       backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
+  #       backendAzureRmStorageAccountName: $(backendAzureRmStorageAccountName)
+  #       backendAzureRmContainerName: $(backendAzureRmContainerName)
+  #       backendAzureRmKey: $(backendAzureRmKey)
+  #       allowTelemetryCollection: true
+  #   - task: TerraformCLI@0
+  #     displayName: Terraform Validate
+  #     inputs:
+  #       command: 'validate'
+  #       workingDirectory: $(terraformWrokingDir)
+  #       allowTelemetryCollection: true
+  #   - task: TerraformCLI@0
+  #     displayName: Terraform Apply
+  #     inputs:
+  #       command: 'apply'
+  #       workingDirectory: $(terraformWrokingDir)
+  #       environmentServiceName: $(environmentServiceName)
+  #       allowTelemetryCollection: true
