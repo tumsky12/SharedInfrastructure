@@ -9,5 +9,5 @@ stages:
   parameters:
     displayName: 'Core Infra'
     terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
-    backendAzureRmContainerName: 'core-terraform-prod'
+    backendAzureRmContainerName: 'shared-core-terraform-prod'
 

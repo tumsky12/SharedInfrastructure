@@ -12,16 +12,6 @@ parameters:
   default: 'terraformprod1784531786'
 - name: backendAzureRmKey
   default: 'terraform-prod'
-
-# variables:
-#   # Terraform
-#   terraformWorkingDir : '$(System.DefaultWorkingDirectory)/${{ parameters.directoryName }}/Terraform'
-#   environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
-#   azServiceConnection: 'terraform-azure-connection'
-#   backendAzureRmResourceGroupName: 'terraform-prod'
-#   backendAzureRmStorageAccountName: 'terraformprod1784531786'
-#   backendAzureRmContainerName: ${{ parameters.containerName }}
-#   backendAzureRmKey: 'terraform-prod'
   
 stages:
 - stage:
@@ -48,16 +38,16 @@ stages:
         backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
         backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
         allowTelemetryCollection: true
-  #   - task: TerraformCLI@0
-  #     displayName: Terraform Validate
-  #     inputs:
-  #       command: 'validate'
-  #       workingDirectory: $(terraformWorkingDir)
-  #       allowTelemetryCollection: true
-  #   - task: TerraformCLI@0
-  #     displayName: Terraform Apply
-  #     inputs:
-  #       command: 'apply'
-  #       workingDirectory: $(terraformWorkingDir)
-  #       environmentServiceName: $(environmentServiceName)
-  #       allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: Terraform Validate
+      inputs:
+        command: 'validate'
+        workingDirectory: $(terraformWorkingDir)
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: Terraform Apply
+      inputs:
+        command: 'apply'
+        workingDirectory: $(terraformWorkingDir)
+        environmentServiceName: $(environmentServiceName)
+        allowTelemetryCollection: true
