@@ -40,7 +40,7 @@ stages:
       displayName: Terraform Init
       inputs:
         command: 'init'
-        workingDirectory: ${{ parameters.terraformWrokingDir }}
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
         backendType: 'azurerm'
         backendServiceArm: ${{ parameters.environmentServiceName }}
         backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
@@ -52,12 +52,12 @@ stages:
   #     displayName: Terraform Validate
   #     inputs:
   #       command: 'validate'
-  #       workingDirectory: $(terraformWrokingDir)
+  #       workingDirectory: $(terraformWorkingDir)
   #       allowTelemetryCollection: true
   #   - task: TerraformCLI@0
   #     displayName: Terraform Apply
   #     inputs:
   #       command: 'apply'
-  #       workingDirectory: $(terraformWrokingDir)
+  #       workingDirectory: $(terraformWorkingDir)
   #       environmentServiceName: $(environmentServiceName)
   #       allowTelemetryCollection: true
