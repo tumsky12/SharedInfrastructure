@@ -24,7 +24,7 @@ parameters:
 #   backendAzureRmKey: 'terraform-prod'
   
 stages:
-- stage: ${{ parameters.displayName }}
+- stage:
   displayName: Provision ${{ parameters.displayName }}
   jobs:
   - job: Install
