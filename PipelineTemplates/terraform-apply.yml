@@ -13,7 +13,8 @@ parameters:
 - name: backendAzureRmKey
   default: 'terraform-prod'
 
-# variables:
+variables:
+  foo: 'baa'
 #   # Terraform
 #   terraformWorkingDir : '$(System.DefaultWorkingDirectory)/${{ parameters.directoryName }}/Terraform'
 #   environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
