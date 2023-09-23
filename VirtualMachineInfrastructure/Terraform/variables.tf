@@ -8,12 +8,11 @@ variable "resource_prefix" {
   description = "Prefix of the resource."
 }
 
-variable "resource_suffix" {
+variable "resource_environment" {
   default     = "prod"
-  description = "Prefix of the resource."
-}
-
-variable "shared_resource_group_name" {
-  default =  "${var.resource_prefix}-rg-${var.resource_suffix}"
-  description = "Name of the shared infra resource group."  
+  description = "Environment of the resource."
+  validation {
+    condition     = contains(["prod", "stg", "dev"], var.resource_environment)
+    error_message = "The environment must be either 'prod', 'stg' or 'dev'."
+  }
 }
