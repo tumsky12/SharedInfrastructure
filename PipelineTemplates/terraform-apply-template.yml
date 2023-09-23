@@ -31,7 +31,7 @@ stages:
       inputs:
         command: 'fmt'
         allowTelemetryCollection: true
-        commandOptions: '-check -list=false'
+        commandOptions: '-check -recursive'
     - task: TerraformCLI@0
       displayName: Terraform Init
       inputs:
