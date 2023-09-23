@@ -1,17 +1,17 @@
 parameters:
--name: displayName
--name: terraformWorkingDir
--name: backendAzureRmContainerName
--name: environmentServiceName
-  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
--name: azServiceConnection
-  default: 'terraform-azure-connection'
--name: backendAzureRmResourceGroupName
-  default: 'terraform-prod'
--name: backendAzureRmStorageAccountName
-  default: 'terraformprod1784531786'
--name: backendAzureRmKey
-  default: 'terraform-prod'
+- name: displayName
+- name: terraformWorkingDir
+- name: backendAzureRmContainerName
+- name: environmentServiceName
+   default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+- name: azServiceConnection
+   default: 'terraform-azure-connection'
+- name: backendAzureRmResourceGroupName
+   default: 'terraform-prod'
+- name: backendAzureRmStorageAccountName
+   default: 'terraformprod1784531786'
+- name: backendAzureRmKey
+   default: 'terraform-prod'
 
 # variables:
 #   # Terraform
