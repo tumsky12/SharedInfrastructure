@@ -1,5 +1,5 @@
 parameters:
-- name: displayName
+- name: name
 - name: terraformWorkingDir
 - name: backendAzureRmContainerName
 - name: environmentServiceName
@@ -15,7 +15,7 @@ parameters:
 
 stages:
 - stage:
-  displayName: Provision ${{ parameters.displayName }}
+  displayName: Provision ${{ parameters.name }}
   jobs:
   - job: Install
     displayName: Install Terraform

@@ -1,5 +1,5 @@
 parameters:
-- name: displayName
+- name: name
 - name: terraformWorkingDir
 - name: backendAzureRmContainerName
 - name: environmentServiceName
@@ -15,7 +15,7 @@ parameters:
   
 stages:
 - stage:
-  displayName: Provision ${{ parameters.displayName }}
+  displayName: Provision ${{ parameters.name }}
   jobs:
   - job: Install
     displayName: Install Terraform
@@ -45,9 +45,20 @@ stages:
         workingDirectory: ${{ parameters.terraformWorkingDir }}
         allowTelemetryCollection: true
     - task: TerraformCLI@0
+      displayName: Terraform Plan
+      inputs:
+        command: 'plan'
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
+        environmentServiceName: ${{ parameters.environmentServiceName }}
+        allowTelemetryCollection: true
+        publishPlanResults: ${{ parameters.name }}
+        commandOptions: '-out=$(System.DefaultWorkingDirectory)/${{ parameters.name }}_terraform.tfplan -detailed-exitcode'
+    - task: TerraformCLI@0
       displayName: Terraform Apply
+      condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
       inputs:
         command: 'apply'
         workingDirectory: ${{ parameters.terraformWorkingDir }}
         environmentServiceName: ${{ parameters.environmentServiceName }}
         allowTelemetryCollection: true
+        commandOptions: '$(System.DefaultWorkingDirectory)/${{ parameters.name }}_terraform.tfplan'
