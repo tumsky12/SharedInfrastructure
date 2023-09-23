@@ -1,0 +1,54 @@
+parameters:
+- name: directoryName
+  default: ''
+- name: containerName
+  default: ''
+
+variables:
+  # Terraform
+  terraformWrokingDir : '$(System.DefaultWorkingDirectory)/${{ parameters.directoryName }}/Terraform'
+  environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+  azServiceConnection: 'terraform-azure-connection'
+  backendAzureRmResourceGroupName: 'terraform-prod'
+  backendAzureRmStorageAccountName: 'terraformprod1784531786'
+  backendAzureRmContainerName: ${{ parameters.containerName }}
+  backendAzureRmKey: 'terraform-prod'
+  
+stages:
+- stage: ${{ parameters.directoryName }}
+  displayName: Provision ${{ parameters.directoryName }}
+  jobs:
+  - job: Install
+    displayName: Install Terraform
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+  - job: Provision
+    displayName: Provision Resources
+    steps:
+    - task: TerraformCLI@0
+      displayName: Terraform Innit
+      inputs:
+        command: 'init'
+        workingDirectory: $(terraformWrokingDir)
+        backendType: 'azurerm'
+        backendServiceArm: $(environmentServiceName)
+        backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(backendAzureRmStorageAccountName)
+        backendAzureRmContainerName: $(backendAzureRmContainerName)
+        backendAzureRmKey: $(backendAzureRmKey)
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: Terraform Validate
+      inputs:
+        command: 'validate'
+        workingDirectory: $(terraformWrokingDir)
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: Terraform Apply
+      inputs:
+        command: 'apply'
+        workingDirectory: $(terraformWrokingDir)
+        environmentServiceName: $(environmentServiceName)
+        allowTelemetryCollection: true

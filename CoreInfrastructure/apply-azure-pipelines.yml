@@ -1,0 +1,11 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+stages:
+- template: ../PipelineTemplates/terraform-apply.yml
+  parameters:
+    directoryName: 'CoreInfrastructure'
+    containerName: 'core-terraform-prod'
