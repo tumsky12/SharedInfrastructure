@@ -4,9 +4,5 @@ resources:
 - repo: self
 
 stages:
-- template: ../PipelineTemplates/terraform-destroy.yml
-  parameters:
-    displayName: 'Shared Core Infra'
-    terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
-    backendAzureRmContainerName: 'shared-core-tf-storage'
+- template: destroy-template.yml
 

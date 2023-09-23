@@ -1,0 +1,7 @@
+stages:
+- template: ../PipelineTemplates/terraform-apply-template.yml
+  parameters:
+    displayName: 'Shared Core Infra'
+    terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
+    backendAzureRmContainerName: 'shared-core-tf-storage'
+

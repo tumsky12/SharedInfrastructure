@@ -5,6 +5,6 @@ resources:
 - repo: self
 
 stages:
-- template: CoreInfrastructure/apply-azure-pipelines.yml
-- template: VirtualMachineInfrastructure/apply-azure-pipelines.yml
+- template: CoreInfrastructure/apply-template.yml
+- template: VirtualMachineInfrastructure/apply-template.yml
 

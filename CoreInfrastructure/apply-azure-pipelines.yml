@@ -4,9 +4,4 @@ resources:
 - repo: self
 
 stages:
-- template: ../PipelineTemplates/terraform-apply.yml
-  parameters:
-    displayName: 'Shared Core Infra'
-    terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
-    backendAzureRmContainerName: 'shared-core-tf-storage'
-
+- template: apply-template.yml
