@@ -13,21 +13,21 @@ terraform {
     azuread = {
       source  = "hashicorp/azuread"
       version = "~> 2.39.0"
-    }    
+    }
   }
   backend "azurerm" {
-      resource_group_name  = "terraform-prod"
-      storage_account_name = "terraformprod1784531786"
-      container_name       = "shared-tf-storage"
-      key                  = "terraform.tfstate"
-  }  
+    resource_group_name  = "terraform-prod"
+    storage_account_name = "terraformprod1784531786"
+    container_name       = "shared-tf-storage"
+    key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
   features {
-      key_vault {
-        purge_soft_delete_on_destroy    = true
-        recover_soft_deleted_key_vaults = true
+    key_vault {
+      purge_soft_delete_on_destroy    = true
+      recover_soft_deleted_key_vaults = true
     }
   }
 }

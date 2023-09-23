@@ -9,7 +9,7 @@ variable "resource_prefix" {
 }
 
 variable "resource_environment" {
-  default     = "prod"
+  default = "prod"
   validation {
     condition     = contains(["prod", "stg", "dev"], var.resource_environment)
     error_message = "The environment must be either 'prod', 'stg' or 'dev'."
