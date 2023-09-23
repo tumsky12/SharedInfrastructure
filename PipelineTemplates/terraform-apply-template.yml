@@ -27,6 +27,12 @@ stages:
     displayName: Provision Resources
     steps:
     - task: TerraformCLI@0
+      displayName: Terraform Format Check
+      inputs:
+        command: 'fmt'
+        allowTelemetryCollection: true
+        commandOptions: '-check -list=false'
+    - task: TerraformCLI@0
       displayName: Terraform Init
       inputs:
         command: 'init'
