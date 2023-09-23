@@ -13,8 +13,7 @@ parameters:
 - name: backendAzureRmKey
   default: 'terraform-prod'
 
-variables:
-  foo: 'baa'
+# variables:
 #   # Terraform
 #   terraformWorkingDir : '$(System.DefaultWorkingDirectory)/${{ parameters.directoryName }}/Terraform'
 #   environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
@@ -34,21 +33,21 @@ stages:
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: 'latest'
-  # - job: Provision
-  #   displayName: Provision Resources
-  #   steps:
-  #   - task: TerraformCLI@0
-  #     displayName: Terraform Innit
-  #     inputs:
-  #       command: 'init'
-  #       workingDirectory: $(terraformWrokingDir)
-  #       backendType: 'azurerm'
-  #       backendServiceArm: $(environmentServiceName)
-  #       backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
-  #       backendAzureRmStorageAccountName: $(backendAzureRmStorageAccountName)
-  #       backendAzureRmContainerName: $(backendAzureRmContainerName)
-  #       backendAzureRmKey: $(backendAzureRmKey)
-  #       allowTelemetryCollection: true
+  - job: Provision
+    displayName: Provision Resources
+    steps:
+    - task: TerraformCLI@0
+      displayName: Terraform Init
+      inputs:
+        command: 'init'
+        workingDirectory: ${{ parameters.terraformWrokingDir }}
+        backendType: 'azurerm'
+        backendServiceArm: ${{ parameters.environmentServiceName }}
+        backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+        backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
+        backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
+        backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+        allowTelemetryCollection: true
   #   - task: TerraformCLI@0
   #     displayName: Terraform Validate
   #     inputs:
