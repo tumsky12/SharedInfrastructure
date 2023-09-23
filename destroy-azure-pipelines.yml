@@ -1,0 +1,9 @@
+trigger: none
+
+resources:
+- repo: self
+
+stages:
+- template: VirtualMachineInfrastructure/destroy-template.yml
+- template: CoreInfrastructure/destroy-template.yml
+
