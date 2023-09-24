@@ -2,7 +2,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   name                = "example-machine"
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
-  size                = "Standard_B1"
+  size                = "Standard_B1s"
   admin_username      = "adminuser"
   admin_password      = "P@$$w0rd1234!"
   network_interface_ids = [
