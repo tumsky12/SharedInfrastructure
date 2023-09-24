@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "kv" {
-  name                        = "${var.resource_prefix}-kv-${var.resource_environment}"
+  name                        = "${var.resource_prefix}-kv-vm-${var.resource_environment}"
   location                    = data.azurerm_resource_group.rg.location
   resource_group_name         = data.azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
