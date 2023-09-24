@@ -1,5 +1,5 @@
 resource "azurerm_windows_virtual_machine" "vm" {
-  name                = "example-machine"
+  name                = "${var.resource_prefix}-vm-${var.resource_environment}"
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
   size                = "Standard_B1s"
