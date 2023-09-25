@@ -18,7 +18,7 @@ resource "azurerm_role_assignment" "ra_kv_admin" {
 }
 
 resource "azurerm_key_vault_secret" "kvstemp" {
-  name         = "admin_username"
+  name         = "admin-username"
   value        = local.shared_vm_admin_username
   key_vault_id = azurerm_key_vault.kv.id
 
@@ -26,7 +26,7 @@ resource "azurerm_key_vault_secret" "kvstemp" {
 }
 
 resource "azurerm_key_vault_secret" "kvs" {
-  name         = "admin_password"
+  name         = "admin-password"
   value        = random_password.vm_password.result
   key_vault_id = azurerm_key_vault.kv.id
 
