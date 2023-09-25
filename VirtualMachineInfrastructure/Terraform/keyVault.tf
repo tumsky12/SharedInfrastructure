@@ -24,3 +24,11 @@ resource "azurerm_key_vault_secret" "kvs" {
 
   depends_on = [azurerm_role_assignment.ra_kv_admin]
 }
+
+resource "azurerm_key_vault_secret" "kvs" {
+  name         = "foo"
+  value        = "baa"
+  key_vault_id = azurerm_key_vault.kv.id
+
+  depends_on = [azurerm_role_assignment.ra_kv_admin]
+}
