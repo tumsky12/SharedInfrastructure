@@ -17,17 +17,17 @@ resource "azurerm_role_assignment" "ra_kv_admin" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-resource "azurerm_key_vault_secret" "kvs" {
-  name         = "admin-password"
-  value        = random_password.vm_password.result
+resource "azurerm_key_vault_secret" "kvstemp" {
+  name         = "admin_username"
+  value        = local.shared_vm_admin_username
   key_vault_id = azurerm_key_vault.kv.id
 
   depends_on = [azurerm_role_assignment.ra_kv_admin]
 }
 
-resource "azurerm_key_vault_secret" "kvstemp" {
-  name         = "foo"
-  value        = "baa"
+resource "azurerm_key_vault_secret" "kvs" {
+  name         = "admin_password"
+  value        = random_password.vm_password.result
   key_vault_id = azurerm_key_vault.kv.id
 
   depends_on = [azurerm_role_assignment.ra_kv_admin]

@@ -3,7 +3,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
   size                = "Standard_B1s"
-  admin_username      = "adminuser"
+  admin_username      = local.shared_vm_admin_username
   admin_password      = random_password.vm_password.result
   network_interface_ids = [
     data.azurerm_network_interface.nic.id,

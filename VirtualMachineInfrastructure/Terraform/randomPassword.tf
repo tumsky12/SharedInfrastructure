@@ -1,4 +1,4 @@
 resource "random_password" "vm_password" {
-  length  = 16
+  length  = 32
   special = true
 }
