@@ -26,3 +26,8 @@ variable "resource_environment" {
     error_message = "The environment must be either 'prod', 'stg' or 'dev'."
   }
 }
+
+# variable "secret_user_principal_id" {
+#   default     = ""
+#   description = "Principal id to give secret user permissions to."
+# }
