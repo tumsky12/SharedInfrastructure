@@ -19,6 +19,6 @@ resource "azurerm_role_assignment" "ra_kv_admin" {
 
 resource "azurerm_role_assignment" "ra_kv_user" {
   scope                = azurerm_key_vault.kv.id
-  role_definition_name = "Key Vault Secrets User"
+  role_definition_name = "Key Vault Administrator"
   principal_id         = module.constants.owners_group_id
 }
