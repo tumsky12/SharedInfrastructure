@@ -8,7 +8,7 @@ variable "resource_prefix" {
   description = "Prefix of the resource."
 }
 
-variable "resource_suffix" {
+variable "resource_environment" {
   default     = "prod"
   description = "Prefix of the resource."
 }

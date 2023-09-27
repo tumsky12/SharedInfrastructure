@@ -1,0 +1,10 @@
+trigger:
+- master
+
+resources:
+- repo: self
+
+stages:
+- template: CoreInfrastructure/apply-template.yml
+- template: VirtualMachineInfrastructure/apply-template.yml
+

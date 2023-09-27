@@ -1,0 +1,6 @@
+stages:
+- template: ../PipelineTemplates/terraform-destroy-template.yml
+  parameters:
+    name: 'VM'
+    terraformWorkingDir: '$(System.DefaultWorkingDirectory)/VirtualMachineInfrastructure/Terraform'
+    backendAzureRmContainerName: 'shared-vm-tf-storage'

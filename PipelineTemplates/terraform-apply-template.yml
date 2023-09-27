@@ -1,0 +1,70 @@
+parameters:
+- name: name
+- name: terraformWorkingDir
+- name: backendAzureRmContainerName
+- name: environmentServiceName
+  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+- name: azServiceConnection
+  default: 'terraform-azure-connection'
+- name: backendAzureRmResourceGroupName
+  default: 'terraform-prod'
+- name: backendAzureRmStorageAccountName
+  default: 'terraformprod1784531786'
+- name: backendAzureRmKey
+  default: 'terraform-prod'
+  
+stages:
+- stage:
+  displayName: Provision ${{ parameters.name }}
+  jobs:
+  - job: Install
+    displayName: Install Terraform
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+  - job: Provision
+    displayName: Provision Resources
+    steps:
+    - task: TerraformCLI@0
+      displayName: Terraform Format Check
+      inputs:
+        command: 'fmt'
+        allowTelemetryCollection: true
+        commandOptions: '-check -recursive'
+    - task: TerraformCLI@0
+      displayName: Terraform Init
+      inputs:
+        command: 'init'
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
+        backendType: 'azurerm'
+        backendServiceArm: ${{ parameters.environmentServiceName }}
+        backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+        backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
+        backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
+        backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: Terraform Validate
+      inputs:
+        command: 'validate'
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: Terraform Plan
+      inputs:
+        command: 'plan'
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
+        environmentServiceName: ${{ parameters.environmentServiceName }}
+        allowTelemetryCollection: true
+        publishPlanResults: ${{ parameters.name }}
+        commandOptions: '-out=$(System.DefaultWorkingDirectory)/${{ parameters.name }}_terraform.tfplan -detailed-exitcode'
+    - task: TerraformCLI@0
+      displayName: Terraform Apply
+      condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
+      inputs:
+        command: 'apply'
+        workingDirectory: ${{ parameters.terraformWorkingDir }}
+        environmentServiceName: ${{ parameters.environmentServiceName }}
+        allowTelemetryCollection: true
+        commandOptions: '$(System.DefaultWorkingDirectory)/${{ parameters.name }}_terraform.tfplan'
