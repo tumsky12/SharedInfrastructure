@@ -4,4 +4,4 @@ resources:
 - repo: self
 
 jobs:
-- template: apply-core-infrastructure-job-template.yml
+- template: apply-core-infrastructure-job.yml
