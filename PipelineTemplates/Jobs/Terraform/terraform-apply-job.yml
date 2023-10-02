@@ -14,35 +14,43 @@ parameters:
   default: 'terraform-prod'
 
 jobs:
-- job:
-  displayName: 'Terraform Apply ${{ parameters.name }} Infrastructure'
+- job: Install
+  displayName: Install Terraform
   steps:
-  -template: ../Steps/Terraform/terraform-install-step.yml
-    parameters:
-      name: ${{ parameters.name }}
-  # -template: ../Steps/Terraform/terraform-check-formatting-step.yml
-  #   parameters:
-  #     name: ${{ parameters.name }}
-  # -template: ../Steps/Terraform/terraform-init-step.yml
-  #   parameters:
-  #     name: ${{ parameters.name }}
-  #     terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
-  #     backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
-  #     environmentServiceName: ${{ parameters.environmentServiceName }}
-  #     backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
-  #     backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
-  #     backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
-  # -template: ../Steps/Terraform/terraform-validate-step.yml
-  #   parameters:
-  #     name: ${{ parameters.name }}
-  #     terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
-  # -template: ../Steps/Terraform/terraform-plan-step.yml
-  #   parameters:
-  #     name: ${{ parameters.name }}
-  #     terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
-  #     environmentServiceName: ${{ parameters.environmentServiceName }}
-  # -template: ../Steps/Terraform/terraform-apply-step.yml
-  #   parameters:
-  #     name: ${{ parameters.name }}
-  #     terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
-  #     environmentServiceName: ${{ parameters.environmentServiceName }}
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: 'latest'
+
+# jobs:
+# - job:
+#   displayName: 'Terraform Apply ${{ parameters.name }} Infrastructure'
+#   steps:
+#   -template: ../Steps/Terraform/terraform-install-step.yml
+#     parameters:
+#       name: ${{ parameters.name }}
+#   -template: ../Steps/Terraform/terraform-check-formatting-step.yml
+#     parameters:
+#       name: ${{ parameters.name }}
+#   -template: ../Steps/Terraform/terraform-init-step.yml
+#     parameters:
+#       name: ${{ parameters.name }}
+#       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+#       backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
+#       environmentServiceName: ${{ parameters.environmentServiceName }}
+#       backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+#       backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
+#       backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+#   -template: ../Steps/Terraform/terraform-validate-step.yml
+#     parameters:
+#       name: ${{ parameters.name }}
+#       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+#   -template: ../Steps/Terraform/terraform-plan-step.yml
+#     parameters:
+#       name: ${{ parameters.name }}
+#       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+#       environmentServiceName: ${{ parameters.environmentServiceName }}
+#   -template: ../Steps/Terraform/terraform-apply-step.yml
+#     parameters:
+#       name: ${{ parameters.name }}
+#       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+#       environmentServiceName: ${{ parameters.environmentServiceName }}
