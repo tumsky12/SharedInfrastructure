@@ -4,5 +4,5 @@ resources:
 - repo: self
 
 stages:
-- template: destroy-template.yml
+- template: destroy-vm-infrastructure-job.yml
 

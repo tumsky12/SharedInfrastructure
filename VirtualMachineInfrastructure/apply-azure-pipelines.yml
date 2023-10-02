@@ -4,4 +4,4 @@ resources:
 - repo: self
 
 stages:
-- template: apply-template.yml
+- template: apply-vm-infrastructure-job.yml

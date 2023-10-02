@@ -6,7 +6,7 @@ parameters:
 
 steps:
 - task: TerraformCLI@0
-  displayName: 'Terraform Plan ${{ parameters.name }}'
+  displayName: 'Terraform Destroy Plan ${{ parameters.name }}'
   inputs:
     command: 'plan'
     workingDirectory: ${{ parameters.terraformWorkingDir }}
