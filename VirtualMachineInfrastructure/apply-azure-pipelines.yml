@@ -3,5 +3,5 @@ trigger: none
 resources:
 - repo: self
 
-stages:
+jobs:
 - template: apply-vm-infrastructure-job.yml
