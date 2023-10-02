@@ -17,9 +17,9 @@ jobs:
 - job: Install
   displayName: Install Terraform
   steps:
-  - task: TerraformInstaller@0
-    inputs:
-      terraformVersion: 'latest'
+  - template: ../Steps/Terraform/terraform-install-step.yml
+    parameters:
+      name: ${{ parameters.name }}      
 
 # jobs:
 # - job:
