@@ -36,12 +36,12 @@ jobs:
     parameters:
       name: ${{ parameters.name }}
       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
-  - template: ../../Steps/Terraform/terraform-destroy-plan-step.yml
+  - template: ../../Steps/Terraform/terraform-plan-step.yml
     parameters:
       name: ${{ parameters.name }}
       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
-  - template: ../../Steps/Terraform/terraform-destroy-step.yml
+  - template: ../../Steps/Terraform/terraform-apply-step.yml
     parameters:
       name: ${{ parameters.name }}
       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
