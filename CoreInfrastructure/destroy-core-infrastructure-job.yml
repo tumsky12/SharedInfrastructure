@@ -1,5 +1,5 @@
-stages:
-- template: ../PipelineTemplates/terraform-destroy-template.yml
+jobs:
+- template: ../PipelineTemplates/Jobs/Terraform/terraform-destroy-job.yml
   parameters:
     name: 'Core'
     terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'

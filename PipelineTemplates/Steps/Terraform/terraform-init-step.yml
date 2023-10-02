@@ -1,0 +1,26 @@
+parameters:
+- name: name
+- name: terraformWorkingDir
+- name: backendAzureRmContainerName
+- name: environmentServiceName
+  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+- name: backendAzureRmResourceGroupName
+  default: 'terraform-prod'
+- name: backendAzureRmStorageAccountName
+  default: 'terraformprod1784531786'
+- name: backendAzureRmKey
+  default: 'terraform-prod'
+
+steps:
+- task: TerraformCLI@0
+  displayName: 'Terraform Init ${{ parameters.name }}'
+  inputs:
+    command: 'init'
+    workingDirectory: ${{ parameters.terraformWorkingDir }}
+    backendType: 'azurerm'
+    backendServiceArm: ${{ parameters.environmentServiceName }}
+    backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+    backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
+    backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
+    backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+    allowTelemetryCollection: true

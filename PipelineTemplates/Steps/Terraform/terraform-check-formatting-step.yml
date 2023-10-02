@@ -1,0 +1,10 @@
+parameters:
+- name: name
+
+steps:
+- task: TerraformCLI@0
+  displayName: 'Terraform Check Formatting ${{ parameters.name }}'
+  inputs:
+    command: 'fmt'
+    allowTelemetryCollection: true
+    commandOptions: '-check -recursive'

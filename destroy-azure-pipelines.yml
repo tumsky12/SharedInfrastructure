@@ -3,7 +3,6 @@ trigger: none
 resources:
 - repo: self
 
-stages:
-- template: VirtualMachineInfrastructure/destroy-template.yml
-- template: CoreInfrastructure/destroy-template.yml
-
+jobs:
+- template: VirtualMachineInfrastructure/destroy-vm-infrastructure-job.yml
+- template: CoreInfrastructure/destroy-core-infrastructure-job.yml

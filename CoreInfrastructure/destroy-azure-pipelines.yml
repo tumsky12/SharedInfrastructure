@@ -3,6 +3,6 @@ trigger: none
 resources:
 - repo: self
 
-stages:
-- template: destroy-template.yml
+jobs:
+- template: destroy-core-infrastructure-job.yml
 

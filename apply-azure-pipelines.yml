@@ -4,7 +4,6 @@ trigger:
 resources:
 - repo: self
 
-stages:
-- template: CoreInfrastructure/apply-template.yml
-- template: VirtualMachineInfrastructure/apply-template.yml
-
+jobs:
+- template: CoreInfrastructure/apply-core-infrastructure-job.yml
+- template: VirtualMachineInfrastructure/apply-vm-infrastructure-job.yml
