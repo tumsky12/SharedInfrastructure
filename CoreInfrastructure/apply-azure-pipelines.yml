@@ -3,13 +3,5 @@ trigger: none
 resources:
 - repo: self
 
-# jobs:
-# - template: apply-core-infrastructure-job-template.yml
-
 jobs:
-- template: ../PipelineTemplates/Jobs/Terraform/terraform-apply-job.yml
-  parameters:
-    name: 'Core'
-    terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
-    backendAzureRmContainerName: 'shared-core-tf-storage'
-
+- template: apply-core-infrastructure-job-template.yml
