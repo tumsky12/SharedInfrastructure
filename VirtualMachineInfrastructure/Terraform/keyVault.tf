@@ -1,4 +1,3 @@
-
 module "kv" {
   source                  = "../../TerraformModules/KeyVault"
   resource_group_location = data.azurerm_resource_group.rg.location

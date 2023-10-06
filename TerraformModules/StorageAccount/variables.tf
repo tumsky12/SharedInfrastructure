@@ -14,8 +14,13 @@ variable "resource_group_name" {
 }
 
 variable "resource_name" {
-  default     = "kv"
+  default     = "sa"
   description = "Name of the resource."
+}
+
+variable "storage_account_numerical_suffix" {
+  default     = "1337"
+  description = "Numerical suffix for global uniqueness."
 }
 
 variable "resource_environment" {
