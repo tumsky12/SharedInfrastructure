@@ -18,6 +18,11 @@ variable "resource_name" {
   description = "Name of the resource."
 }
 
+variable "storage_account_numerical_suffix" {
+  default     = "1337"
+  description = "Numerical suffix for global uniqueness."
+}
+
 variable "resource_environment" {
   default     = "prod"
   description = "Environment of the resource."
