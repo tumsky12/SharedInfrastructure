@@ -6,13 +6,13 @@ resource "azurerm_storage_account" "sa" {
   account_replication_type = "GRS"
 }
 
-resource "azurerm_role_assignment" "ra_sa_admin" {
+resource "azurerm_role_assignment" "ra_sa_admin_current" {
   scope                = azurerm_storage_account.sa.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-resource "azurerm_role_assignment" "ra_sa_admin" {
+resource "azurerm_role_assignment" "ra_sa_admin_owner" {
   scope                = azurerm_storage_account.sa.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = module.constants.owners_group_id
