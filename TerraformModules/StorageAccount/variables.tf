@@ -14,7 +14,7 @@ variable "resource_group_name" {
 }
 
 variable "resource_name" {
-  default     = "kv"
+  default     = "sa"
   description = "Name of the resource."
 }
 
