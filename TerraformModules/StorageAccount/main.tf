@@ -6,20 +6,26 @@ resource "azurerm_storage_account" "sa" {
   account_replication_type = "GRS"
 }
 
-resource "azurerm_role_assignment" "ra_sa_admin_current" {
+resource "azurerm_role_assignment" "ra_sa_sac_current" {
   scope                = azurerm_storage_account.sa.id
-  role_definition_name = "Key Vault Administrator"
+  role_definition_name = "Storage Account Contributor"
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-resource "azurerm_role_assignment" "ra_sa_admin_owner" {
+resource "azurerm_role_assignment" "ra_sa_sbdc_current" {
   scope                = azurerm_storage_account.sa.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id         = module.constants.owners_group_id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
 }
 
-# resource "azurerm_role_assignment" "ra_sa_user" {
-#   scope                = azurerm_storage_account.sa.id
-#   role_definition_name = "Storage Blob Data Reader"
-#   principal_id         = module.constants.owners_group_id
-# }
+resource "azurerm_role_assignment" "ra_sa_sbtc_current" {
+  scope                = azurerm_storage_account.sa.id
+  role_definition_name = "Storage Table Data Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+resource "azurerm_role_assignment" "ra_sa_contributor_owner" {
+  scope                = azurerm_storage_account.sa.id
+  role_definition_name = "Contributor"
+  principal_id         = module.constants.owners_group_id
+}
