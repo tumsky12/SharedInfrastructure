@@ -5,3 +5,5 @@ resources:
 
 jobs:
 - template: apply-core-infrastructure-job.yml
+  parameters:
+    name: 'Core'

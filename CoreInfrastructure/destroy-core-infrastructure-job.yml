@@ -1,7 +1,12 @@
+parameters:
+- name: name
+- name: dependsOn
+  default: []
+
 jobs:
 - template: ../PipelineTemplates/Jobs/Terraform/terraform-destroy-job.yml
   parameters:
-    name: 'Core'
+    name: ${{ parameters.name }}
     terraformWorkingDir: '$(System.DefaultWorkingDirectory)/CoreInfrastructure/Terraform'
     backendAzureRmContainerName: 'shared-core-tf-storage'
-
+    dependsOn: ${{ parameters.dependsOn }}

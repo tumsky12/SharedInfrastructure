@@ -5,4 +5,5 @@ resources:
 
 jobs:
 - template: destroy-vm-infrastructure-job.yml
-
+  parameters:
+    name: 'VM'
