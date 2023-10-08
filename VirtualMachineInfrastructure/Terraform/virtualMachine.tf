@@ -20,4 +20,18 @@ resource "azurerm_windows_virtual_machine" "vm" {
     sku       = "2016-Datacenter"
     version   = "latest"
   }
+
+  winrm_listener {
+    protocol        = "Https"
+    certificate_url = azurerm_key_vault_certificate.kvc.secret_id
+  }
+
+  secret {
+    certificate {
+      store = "My"
+      url   = azurerm_key_vault_certificate.kvc.key_vault_id
+    }
+    key_vault_id = azurerm_key_vault_certificate.kvc.key_vault_id
+  }
+
 }
