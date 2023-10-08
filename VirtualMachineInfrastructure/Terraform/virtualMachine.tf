@@ -29,7 +29,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   secret {
     certificate {
       store = "My"
-      url   = azurerm_key_vault_certificate.kvc.key_vault_id
+      url   = azurerm_key_vault_certificate.kvc.secret_id
     }
     key_vault_id = azurerm_key_vault_certificate.kvc.key_vault_id
   }
