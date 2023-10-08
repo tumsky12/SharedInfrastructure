@@ -8,7 +8,7 @@ jobs:
 - template: CoreInfrastructure/apply-core-infrastructure-job.yml
   parameters:
     name: 'Core'
-# - template: VirtualMachineInfrastructure/apply-vm-infrastructure-job.yml
-#   parameters:
-#     name: 'VM'
-#     dependsOn: 'Core'
+- template: VirtualMachineInfrastructure/apply-vm-infrastructure-job.yml
+  parameters:
+    name: 'VM'
+    dependsOn: 'Core'

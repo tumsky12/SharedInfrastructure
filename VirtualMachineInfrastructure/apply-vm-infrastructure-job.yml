@@ -1,6 +1,7 @@
 parameters:
 - name: name
 - name: dependsOn
+  type: object
   default: []
 
 jobs:
