@@ -50,4 +50,6 @@ resource "azurerm_key_vault_certificate" "kvc" {
       validity_in_months = 48
     }
   }
+
+  depends_on = [module.kv]
 }
