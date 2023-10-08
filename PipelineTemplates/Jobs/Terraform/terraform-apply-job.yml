@@ -14,6 +14,7 @@ parameters:
   default: 'terraform-prod'
 - name: dependsOn
   default: []
+  type: object
 
 jobs:
 - job: ${{ parameters.name }}
