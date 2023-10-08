@@ -1,7 +1,6 @@
 parameters:
-- name: name
-- name: dependsOn
-  default: []
+  name: 'Core'
+  dependsOn: []
 
 jobs:
 - template: ../PipelineTemplates/Jobs/Terraform/terraform-apply-job.yml
