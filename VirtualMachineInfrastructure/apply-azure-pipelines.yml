@@ -5,3 +5,5 @@ resources:
 
 jobs:
 - template: apply-vm-infrastructure-job.yml
+  parameters:
+    name: 'VM'
