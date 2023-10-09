@@ -5,9 +5,9 @@ resource "azurerm_windows_virtual_machine" "vm" {
   #size                = "Standard_B1s"  # vCPU : 1 RAM: 1 DataDisks: 2 MaxIOPs:  320 TempStorage:  4 Price: ~$11.50
   #size                = "Standard_B1ms" # vCPU : 1 RAM: 2 DataDisks: 2 MaxIOPs:  640 TempStorage:  4 Price: ~$20.15
   #size                = "Standard_B2s"  # vCPU : 2 RAM: 4 DataDisks: 4 MaxIOPs: 1280 TempStorage:  8 Price: ~$40.30
-  size                = "Standard_B2ms" # vCPU : 2 RAM: 8 DataDisks: 4 MaxIOPs: 1920 TempStorage: 16 Price: ~$74.46
-  admin_username      = local.shared_vm_admin_username
-  admin_password      = random_password.vm_password.result
+  size           = "Standard_B2ms" # vCPU : 2 RAM: 8 DataDisks: 4 MaxIOPs: 1920 TempStorage: 16 Price: ~$74.46
+  admin_username = local.shared_vm_admin_username
+  admin_password = random_password.vm_password.result
   network_interface_ids = [
     data.azurerm_network_interface.nic.id,
   ]
