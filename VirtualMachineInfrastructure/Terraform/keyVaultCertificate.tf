@@ -46,7 +46,7 @@ resource "azurerm_key_vault_certificate" "kvc" {
       #   dns_names = ["internal.contoso.com", "domain.hello.world"]
       # }      
 
-      subject            = "CN=${var.resource_prefix}"
+      subject            = "CN=${var.resource_prefix}-vm-${var.resource_environment}"
       validity_in_months = 48
     }
   }
