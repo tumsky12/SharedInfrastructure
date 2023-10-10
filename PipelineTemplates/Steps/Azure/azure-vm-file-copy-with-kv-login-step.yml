@@ -9,6 +9,7 @@ parameters:
 - name: sourcePath
 - name: storage
 - name: containerName
+  default: 'deployments'
 - name: blobPrefix
   default: ''
 - name: resourceGroup
