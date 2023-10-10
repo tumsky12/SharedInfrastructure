@@ -18,6 +18,12 @@ variable "resource_name" {
   description = "Name of the resource."
 }
 
+variable "min_tls_version" {
+  default     = "TLS1_2"
+  description = "The minimum supported TLS version for the storage account."
+}
+
+
 variable "storage_account_numerical_suffix" {
   default     = "1337"
   description = "Numerical suffix for global uniqueness."
