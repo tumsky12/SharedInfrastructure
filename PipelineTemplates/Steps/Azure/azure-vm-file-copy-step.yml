@@ -1,0 +1,35 @@
+parameters:
+- name: sourcePath
+- name: storage
+- name: containerName
+- name: blobPrefix
+  type: object
+  default: []
+- name: resourceGroup
+- name: vmsAdminUserName
+- name: vmsAdminPassword
+- name: targetPath
+  default: 'c:\'
+- name: cleanTargetBeforeCopy
+  type: boolean
+  default: true
+- name: azureSubscription
+  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+
+steps:
+- task: AzureFileCopy@3
+  displayName: 'Azure VM File Copy ${{ parameters.resourceGroup }}'
+  inputs:
+    SourcePath: ${{ parameters.sourcePath }}
+    azureSubscription: ${{ parameters.azureSubscription }}
+    Destination: 'AzureVMs'
+    storage: ${{ parameters.storage }}
+    ContainerName: ${{ parameters.containerName }}
+    BlobPrefix: ${{ parameters.blobPrefix }}
+    resourceGroup: ${{ parameters.resourceGroup }}
+    vmsAdminUserName: ${{ parameters.vmsAdminUserName }}
+    vmsAdminPassword: ${{ parameters.vmsAdminPassword }}
+    TargetPath: ${{ parameters.targetPath }}
+    CleanTargetBeforeCopy: ${{ parameters.cleanTargetBeforeCopy }}
+    skipCACheck: true
+    enableCopyPrerequisites: false

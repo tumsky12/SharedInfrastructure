@@ -1,0 +1,42 @@
+parameters:
+- name: keyVaultName
+- name: secretsFilter
+  default: '*'
+- name: runAsPreJob
+  type: boolean
+  default: true
+
+- name: sourcePath
+- name: storage
+- name: containerName
+- name: blobPrefix
+  type: object
+  default: []
+- name: resourceGroup
+- name: targetPath
+  default: 'c:\'
+- name: cleanTargetBeforeCopy
+  type: boolean
+  default: true
+- name: azureSubscription
+  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+
+steps:
+- template: azure-key-vault-step.yml
+    parameters:
+      keyVaultName: ${{ parameters.keyVaultName }}
+      secretsFilter: ${{ parameters.secretsFilter }}
+      runAsPreJob: ${{ parameters.runAsPreJob }}
+      azureSubscription: ${{ parameters.azureSubscription }}
+- template: azure-vm-file-copy-step.yml
+    parameters:
+      sourcePath: ${{ parameters.sourcePath }}      
+      storage: ${{ parameters.storage }}      
+      containerName: ${{ parameters.containerName }}      
+      blobPrefix: ${{ parameters.blobPrefix }}      
+      resourceGroup: ${{ parameters.resourceGroup }}      
+      vmsAdminUserName: '$(admin-username)'  
+      vmsAdminPassword: '$(admin-password)'   
+      targetPath: ${{ parameters.targetPath }}      
+      cleanTargetBeforeCopy: ${{ parameters.cleanTargetBeforeCopy }}      
+      azureSubscription: ${{ parameters.azureSubscription }}      
