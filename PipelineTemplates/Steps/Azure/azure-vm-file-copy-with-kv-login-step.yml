@@ -10,8 +10,7 @@ parameters:
 - name: storage
 - name: containerName
 - name: blobPrefix
-  type: object
-  default: []
+  default: ''
 - name: resourceGroup
 - name: targetPath
   default: 'c:\'
