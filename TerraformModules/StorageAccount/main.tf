@@ -4,6 +4,7 @@ resource "azurerm_storage_account" "sa" {
   resource_group_name      = var.resource_group_name
   account_tier             = "Standard"
   account_replication_type = "GRS"
+  min_tls_version          = var.min_tls_version
 }
 
 resource "azurerm_role_assignment" "ra_sa_sac_current" {
