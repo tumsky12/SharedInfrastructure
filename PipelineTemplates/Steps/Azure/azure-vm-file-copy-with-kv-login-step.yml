@@ -23,20 +23,20 @@ parameters:
 
 steps:
 - template: azure-key-vault-step.yml
-    parameters:
-      keyVaultName: ${{ parameters.keyVaultName }}
-      secretsFilter: ${{ parameters.secretsFilter }}
-      runAsPreJob: ${{ parameters.runAsPreJob }}
-      azureSubscription: ${{ parameters.azureSubscription }}
+  parameters:
+    keyVaultName: ${{ parameters.keyVaultName }}
+    secretsFilter: ${{ parameters.secretsFilter }}
+    runAsPreJob: ${{ parameters.runAsPreJob }}
+    azureSubscription: ${{ parameters.azureSubscription }}
 - template: azure-vm-file-copy-step.yml
-    parameters:
-      sourcePath: ${{ parameters.sourcePath }}      
-      storage: ${{ parameters.storage }}      
-      containerName: ${{ parameters.containerName }}      
-      blobPrefix: ${{ parameters.blobPrefix }}      
-      resourceGroup: ${{ parameters.resourceGroup }}      
-      vmsAdminUserName: '$(admin-username)'  
-      vmsAdminPassword: '$(admin-password)'   
-      targetPath: ${{ parameters.targetPath }}      
-      cleanTargetBeforeCopy: ${{ parameters.cleanTargetBeforeCopy }}      
-      azureSubscription: ${{ parameters.azureSubscription }}      
+  parameters:
+    sourcePath: ${{ parameters.sourcePath }}      
+    storage: ${{ parameters.storage }}      
+    containerName: ${{ parameters.containerName }}      
+    blobPrefix: ${{ parameters.blobPrefix }}      
+    resourceGroup: ${{ parameters.resourceGroup }}      
+    vmsAdminUserName: '$(admin-username)'  
+    vmsAdminPassword: '$(admin-password)'   
+    targetPath: ${{ parameters.targetPath }}      
+    cleanTargetBeforeCopy: ${{ parameters.cleanTargetBeforeCopy }}      
+    azureSubscription: ${{ parameters.azureSubscription }}      
