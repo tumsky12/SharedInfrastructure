@@ -3,8 +3,7 @@ parameters:
 - name: storage
 - name: containerName
 - name: blobPrefix
-  type: object
-  default: []
+  default: ''
 - name: resourceGroup
 - name: vmsAdminUserName
 - name: vmsAdminPassword
@@ -25,7 +24,8 @@ steps:
     Destination: 'AzureVMs'
     storage: ${{ parameters.storage }}
     ContainerName: ${{ parameters.containerName }}
-    BlobPrefix: ${{ parameters.blobPrefix }}
+    ${{ if not(eq(parameters.blobPrefix, '')) }}:
+      BlobPrefix: ${{ parameters.blobPrefix }}
     resourceGroup: ${{ parameters.resourceGroup }}
     vmsAdminUserName: ${{ parameters.vmsAdminUserName }}
     vmsAdminPassword: ${{ parameters.vmsAdminPassword }}
