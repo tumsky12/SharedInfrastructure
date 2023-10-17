@@ -22,3 +22,11 @@ resource "azurerm_key_vault_secret" "kvs_admin_password" {
 
   depends_on = [module.kv]
 }
+
+resource "azurerm_key_vault_secret" "kvs_public_ip" { # TODO: Again don't do this
+  name         = "public-ip"
+  value        = azurerm_public_ip.pip.ip_address
+  key_vault_id = module.kv.key_vault_id
+
+  depends_on = [module.kv]
+}
