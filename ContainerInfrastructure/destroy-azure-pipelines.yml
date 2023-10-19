@@ -6,7 +6,7 @@ resources:
 variables:
   # Terraform
   terraformWorkingDir : '$(System.DefaultWorkingDirectory)/ContainerInfrastructure/Terraform'
-  environmentServiceName : 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+  environmentServiceName : 'Workload Identity Federation Connection'
   azServiceConnection: 'terraform-azure-connection'
   backendAzureRmResourceGroupName: 'terraform-prod'
   backendAzureRmStorageAccountName: 'terraformprod1784531786'

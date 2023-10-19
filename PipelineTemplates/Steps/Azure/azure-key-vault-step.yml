@@ -6,7 +6,7 @@ parameters:
   type: boolean
   default: true
 - name: azureSubscription
-  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+  default: 'Workload Identity Federation Connection'
 
 steps:
 - task: AzureKeyVault@2
