@@ -3,7 +3,7 @@ parameters:
 - name: terraformWorkingDir
 - name: backendAzureRmContainerName
 - name: environmentServiceName
-  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+  default: 'Workload Identity Federation Connection'
 - name: backendAzureRmResourceGroupName
   default: 'terraform-prod'
 - name: backendAzureRmStorageAccountName
@@ -12,7 +12,7 @@ parameters:
   default: 'terraform-prod'
 
 steps:
-- task: TerraformCLI@0
+- task: TerraformCLI@1
   displayName: 'Terraform Init ${{ parameters.name }}'
   inputs:
     command: 'init'

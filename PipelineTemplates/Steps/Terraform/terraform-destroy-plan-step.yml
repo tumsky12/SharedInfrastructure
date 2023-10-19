@@ -2,10 +2,10 @@ parameters:
 - name: name
 - name: terraformWorkingDir
 - name: environmentServiceName
-  default: 'Azure subscription 1(19b03c4d-996a-4046-986e-e12c5b098db7)'
+  default: 'Workload Identity Federation Connection'
 
 steps:
-- task: TerraformCLI@0
+- task: TerraformCLI@1
   displayName: 'Terraform Destroy Plan ${{ parameters.name }}'
   inputs:
     command: 'plan'
