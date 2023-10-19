@@ -3,7 +3,7 @@ parameters:
 - name: terraformWorkingDir
 
 steps:
-- task: TerraformCLI@0
+- task: TerraformCLI@1
   displayName: 'Terraform Validate ${{ parameters.name }}'
   inputs:
     command: 'validate'

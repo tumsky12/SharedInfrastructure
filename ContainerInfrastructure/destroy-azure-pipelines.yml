@@ -26,7 +26,7 @@ stages:
   - job: Provision
     displayName: Provision Resources
     steps:
-    - task: TerraformCLI@0
+    - task: TerraformCLI@1
       displayName: Terraform Innit
       inputs:
         command: 'init'
@@ -38,13 +38,13 @@ stages:
         backendAzureRmContainerName: $(backendAzureRmContainerName)
         backendAzureRmKey: $(backendAzureRmKey)
         allowTelemetryCollection: true
-    - task: TerraformCLI@0
+    - task: TerraformCLI@1
       displayName: Terraform Validate
       inputs:
         command: 'validate'
         workingDirectory: $(terraformWorkingDir)
         allowTelemetryCollection: true
-    - task: TerraformCLI@0
+    - task: TerraformCLI@1
       displayName: Terraform Destroy
       inputs:
         command: 'destroy'

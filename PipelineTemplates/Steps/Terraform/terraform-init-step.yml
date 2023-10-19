@@ -12,7 +12,7 @@ parameters:
   default: 'terraform-prod'
 
 steps:
-- task: TerraformCLI@0
+- task: TerraformCLI@1
   displayName: 'Terraform Init ${{ parameters.name }}'
   inputs:
     command: 'init'
