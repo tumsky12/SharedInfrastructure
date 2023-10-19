@@ -16,3 +16,8 @@ variable "resource_environment" {
     error_message = "The environment must be either 'prod', 'stg' or 'dev'."
   }
 }
+
+variable "storage_account_numerical_suffix" {
+  default     = "1337"
+  description = "Numerical suffix for global uniqueness."
+}
