@@ -1,11 +1,11 @@
 parameters:
 - name: name
-- name: terraformWorkingDir
+- name: workingDirectory
 
 steps:
 - task: TerraformCLI@1
   displayName: 'Terraform Validate ${{ parameters.name }}'
   inputs:
     command: 'validate'
-    workingDirectory: ${{ parameters.terraformWorkingDir }}
+    workingDirectory: ${{ parameters.workingDirectory }}
     allowTelemetryCollection: true

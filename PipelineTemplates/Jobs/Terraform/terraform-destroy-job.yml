@@ -1,6 +1,6 @@
 parameters:
 - name: name
-- name: terraformWorkingDir
+- name: workingDirectory
 - name: backendAzureRmContainerName
 - name: environmentServiceName
   default: 'Workload Identity Federation Connection'
@@ -39,15 +39,15 @@ jobs:
   - template: ../../Steps/Terraform/terraform-validate-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+      workingDirectory: ${{ parameters.workingDirectory }}
   - template: ../../Steps/Terraform/terraform-destroy-plan-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+      workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
       planCommandOptions: ${{ parameters.planCommandOptions }}
   - template: ../../Steps/Terraform/terraform-destroy-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+      workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.environmentServiceName }}

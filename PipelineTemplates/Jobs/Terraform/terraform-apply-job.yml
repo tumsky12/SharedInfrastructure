@@ -40,15 +40,15 @@ jobs:
   - template: ../../Steps/Terraform/terraform-validate-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+      workingDirectory: ${{ parameters.workingDirectory }}
   - template: ../../Steps/Terraform/terraform-plan-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+      workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
       planCommandOptions: ${{ parameters.planCommandOptions }}
   - template: ../../Steps/Terraform/terraform-apply-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
+      workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.environmentServiceName }}

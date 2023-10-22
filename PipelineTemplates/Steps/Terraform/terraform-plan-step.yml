@@ -1,6 +1,6 @@
 parameters:
 - name: name
-- name: terraformWorkingDir
+- name: workingDirectory
 - name: environmentServiceName
   default: 'Workload Identity Federation Connection'
 - name: planCommandOptions
@@ -11,7 +11,7 @@ steps:
   displayName: 'Terraform Plan ${{ parameters.name }}'
   inputs:
     command: 'plan'
-    workingDirectory: ${{ parameters.terraformWorkingDir }}
+    workingDirectory: ${{ parameters.workingDirectory }}
     environmentServiceName: ${{ parameters.environmentServiceName }}
     allowTelemetryCollection: true
     publishPlanResults: ${{ parameters.name }}

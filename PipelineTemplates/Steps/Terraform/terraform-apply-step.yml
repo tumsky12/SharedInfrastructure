@@ -1,6 +1,6 @@
 parameters:
 - name: name
-- name: terraformWorkingDir
+- name: workingDirectory
 - name: environmentServiceName
   default: 'Workload Identity Federation Connection'
   
@@ -10,7 +10,7 @@ steps:
   condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
   inputs:
     command: 'apply'
-    workingDirectory: ${{ parameters.terraformWorkingDir }}
+    workingDirectory: ${{ parameters.workingDirectory }}
     environmentServiceName: ${{ parameters.environmentServiceName }}
     allowTelemetryCollection: true
     commandOptions: '$(System.DefaultWorkingDirectory)/${{ parameters.name }}_terraform.tfplan'
