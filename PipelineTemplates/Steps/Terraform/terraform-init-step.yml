@@ -20,5 +20,5 @@ steps:
     backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
     backendAzureRmStorageAccountSku: 'Standard_RAGRS'
     backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
-    backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+    # backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
     allowTelemetryCollection: true
