@@ -14,7 +14,7 @@ steps:
     command: init
     backendType: azurerm
     backendServiceArm: ${{ parameters.environmentServiceName }}
-    ensureBackend: true
+    #ensureBackend: true
     backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
     backendAzureRmResourceGroupLocation: ${{ parameters.backendAzureRmResourceGroupLocation }}
     backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
