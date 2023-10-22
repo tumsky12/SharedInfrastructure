@@ -4,8 +4,6 @@ parameters:
 - name: backendAzureRmContainerName
 - name: environmentServiceName
   default: 'Workload Identity Federation Connection'
-- name: azServiceConnection
-  default: 'terraform-azure-connection'
 - name: backendAzureRmResourceGroupName
   default: 'terraform-prod'
 - name: backendAzureRmStorageAccountName
@@ -15,6 +13,8 @@ parameters:
 - name: dependsOn
   default: []
   type: object
+- name: planCommandOptions
+  default: ''
 
 jobs:
 - job: ${{ parameters.name }}
@@ -45,6 +45,7 @@ jobs:
       name: ${{ parameters.name }}
       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
+      planCommandOptions: ${{ parameters.tfPlanCommandOptions }}
   - template: ../../Steps/Terraform/terraform-apply-step.yml
     parameters:
       name: ${{ parameters.name }}
