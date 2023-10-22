@@ -1,26 +1,24 @@
 parameters:
 - name: name
-- name: terraformWorkingDir
-- name: backendAzureRmContainerName
 - name: environmentServiceName
-  default: 'Workload Identity Federation Connection'
 - name: backendAzureRmResourceGroupName
-  default: 'terraform-prod'
+- name: backendAzureRmResourceGroupLocation
 - name: backendAzureRmStorageAccountName
-  default: 'terraformprod1784531786'
+- name: backendAzureRmContainerName
 - name: backendAzureRmKey
-  default: 'terraform-prod'
 
 steps:
 - task: TerraformCLI@1
   displayName: 'Terraform Init ${{ parameters.name }}'
   inputs:
-    command: 'init'
-    workingDirectory: ${{ parameters.terraformWorkingDir }}
-    backendType: 'azurerm'
+    command: init
+    backendType: azurerm
     backendServiceArm: ${{ parameters.environmentServiceName }}
+    ensureBackend: true
     backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+    backendAzureRmResourceGroupLocation: ${{ parameters.backendAzureRmResourceGroupLocation }}
     backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
+    backendAzureRmStorageAccountSku: 'Standard_RAGRS'
     backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
     backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
     allowTelemetryCollection: true

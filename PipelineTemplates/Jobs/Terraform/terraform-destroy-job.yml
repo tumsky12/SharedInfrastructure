@@ -5,11 +5,11 @@ parameters:
 - name: environmentServiceName
   default: 'Workload Identity Federation Connection'
 - name: backendAzureRmResourceGroupName
-  default: 'terraform-prod'
+- name: backendAzureRmResourceGroupLocation
+  default: 'uksouth'  
 - name: backendAzureRmStorageAccountName
-  default: 'terraformprod1784531786'
 - name: backendAzureRmKey
-  default: 'terraform-prod'
+  default: 'terraform.tfstate'
 - name: dependsOn
   default: []
   type: object
@@ -30,11 +30,11 @@ jobs:
   - template: ../../Steps/Terraform/terraform-init-step.yml
     parameters:
       name: ${{ parameters.name }}
-      terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
-      backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
       backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+      backendAzureRmResourceGroupLocation: ${{ parameters.backendAzureRmResourceGroupLocation }}
       backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName }}
+      backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
       backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
   - template: ../../Steps/Terraform/terraform-validate-step.yml
     parameters:
