@@ -1,5 +1,6 @@
 parameters:
 - name: name
+- name: workingDirectory
 - name: environmentServiceName
 - name: backendAzureRmResourceGroupName
 - name: backendAzureRmResourceGroupLocation
@@ -11,9 +12,9 @@ steps:
 - task: TerraformCLI@1
   displayName: 'Terraform Init ${{ parameters.name }}'
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Infrastructure/Terraform'
     command: init
     backendType: azurerm
+    workingDirectory: ${{ parameters.workingDirectory }}
     backendServiceArm: ${{ parameters.environmentServiceName }}
     ensureBackend: true
     backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}

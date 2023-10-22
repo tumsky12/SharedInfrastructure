@@ -1,6 +1,6 @@
 parameters:
 - name: name
-- name: terraformWorkingDir
+- name: workingDirectory
 - name: backendAzureRmContainerName
 - name: environmentServiceName
   default: 'Workload Identity Federation Connection'
@@ -30,6 +30,7 @@ jobs:
   - template: ../../Steps/Terraform/terraform-init-step.yml
     parameters:
       name: ${{ parameters.name }}
+      workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
       backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
       backendAzureRmResourceGroupLocation: ${{ parameters.backendAzureRmResourceGroupLocation }}
