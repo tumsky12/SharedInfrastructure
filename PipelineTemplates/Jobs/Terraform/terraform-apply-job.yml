@@ -45,7 +45,7 @@ jobs:
       name: ${{ parameters.name }}
       terraformWorkingDir: ${{ parameters.terraformWorkingDir }}
       environmentServiceName: ${{ parameters.environmentServiceName }}
-      planCommandOptions: ${{ parameters.tfPlanCommandOptions }}
+      planCommandOptions: ${{ parameters.planCommandOptions }}
   - template: ../../Steps/Terraform/terraform-apply-step.yml
     parameters:
       name: ${{ parameters.name }}
