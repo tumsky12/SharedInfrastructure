@@ -1,0 +1,33 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: corePipelineTemplates
+      type: github
+      name: tumsky12/CorePipelineTemplates
+      ref: refs/tags/1.0.0
+      endpoint: GitHubConnection
+
+variables:
+  infrastructureName: SharedInfrastructure
+  backendAzureRmContainerName: shared-tf-storage
+
+extends:
+  template: apply-env-template.yml@self
+  parameters:
+    environments:
+      - envName: 'dev'
+        infrastructureName: $(infrastructureName)
+        backendAzureRmResourceGroupName: rg-terraform-dev
+        backendAzureRmContainerName: $(backendAzureRmContainerName)
+      - envName: 'stg'
+        dependsOn: 'dev'
+        infrastructureName: $(infrastructureName)
+        backendAzureRmResourceGroupName: rg-terraform-stg
+        backendAzureRmContainerName: $(backendAzureRmContainerName)        
+      - envName: 'prd'
+        dependsOn: 'stg'
+        infrastructureName: $(infrastructureName)
+        backendAzureRmResourceGroupName: rg-terraform-prd
+        backendAzureRmContainerName: $(backendAzureRmContainerName)
+

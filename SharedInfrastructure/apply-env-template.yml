@@ -1,0 +1,21 @@
+parameters:
+  - name: environments
+    type: object
+    default:
+      envName: 'name'
+      dependsOn: []
+      infrastructureName: 'infrastructureName'
+      backendAzureRmResourceGroupName: 'backendAzureRmResourceGroupName'
+      backendAzureRmContainerName: 'backendAzureRmContainerName'
+
+stages:
+  - ${{ each env in parameters.environments}}
+    - stage: ${{ env.envName }}
+      jobs: 
+      - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
+        parameters:
+          name: ${{ env.infrastructureName }}
+          dependsOn: ${{ env.dependsOn }}
+          workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
+          backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
+          backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}

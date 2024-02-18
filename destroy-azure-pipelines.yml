@@ -4,10 +4,10 @@ resources:
 - repo: self
 
 jobs:
-- template: VirtualMachineInfrastructure/destroy-vm-infrastructure-job.yml
-  parameters:
-    name: 'VM'
-- template: CoreInfrastructure/destroy-core-infrastructure-job.yml
-  parameters:
-    name: 'Core'
-    dependsOn: 'VM'
+# - template: VirtualMachineInfrastructure/destroy-vm-infrastructure-job.yml
+#   parameters:
+#     name: 'VM'
+# - template: CoreInfrastructure/destroy-core-infrastructure-job.yml
+#   parameters:
+#     name: 'Core'
+#     dependsOn: 'VM'

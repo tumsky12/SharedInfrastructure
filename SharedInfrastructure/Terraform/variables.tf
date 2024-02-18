@@ -10,12 +10,11 @@ variable "resource_prefix" {
 
 variable "resource_environment" {
   default     = "prod"
-  description = "Prefix of the resource."
-}
-
-variable "owner_user_object_id" {
-  default     = "2392353a-6d6f-43b4-b415-a0aa98c39299"
-  description = "Object ID of owner."
+  description = "Environment of the resource."
+  validation {
+    condition     = contains(["dev", "stg", "prd"], var.resource_environment)
+    error_message = "The environment must be either 'dev', 'stg' or 'prd'."
+  }
 }
 
 variable "container_registry_name" {

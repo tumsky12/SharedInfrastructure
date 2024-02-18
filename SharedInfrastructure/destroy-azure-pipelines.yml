@@ -1,0 +1,10 @@
+trigger: none
+
+resources:
+- repo: self
+
+jobs:
+- template: destroy-shared-infrastructure-job.yml
+  parameters:
+    name: 'Shared'
+
