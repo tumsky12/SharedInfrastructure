@@ -5,7 +5,8 @@ resources:
     - repository: corePipelineTemplates
       type: github
       name: tumsky12/CorePipelineTemplates
-      ref: refs/tags/1.0.0
+      # ref: refs/tags/1.0.0
+      ref:  'refs/heads/init-changes'
       endpoint: GitHubConnection
 
 variables:
