@@ -9,8 +9,8 @@ parameters:
       backendAzureRmContainerName: 'backendAzureRmContainerName'
 
 stages:
-  - ${{ each env in parameters.environments}}
-    - stage:
+  - ${{ each env in parameters.environments}}:
+    - stage: ${{ env.envName }}
       jobs: 
       - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
         parameters:
