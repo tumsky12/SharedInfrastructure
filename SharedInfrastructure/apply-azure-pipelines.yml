@@ -9,7 +9,7 @@ resources:
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
-      endpoint: GitHubConnection  
+      endpoint: GitHubConnection
     # - repository: corePipelineTemplates
     #   type: github
     #   name: tumsky12/CorePipelineTemplates
