@@ -2,17 +2,25 @@ trigger: none
 
 resources:
   repositories:
-    - repository: corePipelineTemplates
+    - repository: templates
       type: github
       name: tumsky12/CorePipelineTemplates
-      ref: refs/tags/1.0.0
-      # ref:  'refs/heads/init-changes'
       endpoint: GitHubConnection
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
-      ref:  'refs/heads/main'
-      endpoint: GitHubConnection
+      endpoint: GitHubConnection  
+    # - repository: corePipelineTemplates
+    #   type: github
+    #   name: tumsky12/CorePipelineTemplates
+    #   ref: refs/tags/1.0.0
+    #   # ref:  'refs/heads/init-changes'
+    #   endpoint: GitHubConnection
+    # - repository: terraformModules
+    #   type: github
+    #   name: tumsky12/CoreTerraformModules
+    #   ref:  'refs/heads/main'
+    #   endpoint: GitHubConnection
 
 variables:
   infrastructureName: SharedInfrastructure
@@ -22,7 +30,7 @@ jobs:
 - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
   parameters:
     name: 'foo'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
+    workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
     environmentServiceName: 'Workload Identity Federation Connection'
     backendAzureRmResourceGroupName: terraform-dev
     backendAzureRmResourceGroupLocation: uksouth
