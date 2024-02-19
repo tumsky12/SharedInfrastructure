@@ -9,7 +9,7 @@ variable "resource_prefix" {
 }
 
 variable "resource_environment" {
-  default     = "prod"
+  default     = "dev"
   description = "Environment of the resource."
   validation {
     condition     = contains(["dev", "stg", "prd"], var.resource_environment)
