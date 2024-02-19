@@ -33,7 +33,7 @@ extends:
       - envName: 'dev'
         infrastructureName: 'foo'
         backendAzureRmResourceGroupName: rg-terraform-dev
-        tfVarsFileName: dev.tfvars
+        tfVarsFileName: 'dev.tfvars'
       # - envName: 'stg'
       #   dependsOn: 'dev'
       #   infrastructureName: $(infrastructureName)
