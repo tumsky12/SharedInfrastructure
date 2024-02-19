@@ -8,6 +8,11 @@ resources:
       # ref: refs/tags/1.0.0
       ref:  'refs/heads/init-changes'
       endpoint: GitHubConnection
+    - repository: terraformModules
+      type: github
+      name: tumsky12/CoreTerraformModules
+      ref:  'refs/heads/main'
+      endpoint: GitHubConnection
 
 variables:
   infrastructureName: SharedInfrastructure
