@@ -37,6 +37,13 @@ extends:
         backendAzureRmStorageAccountName: terraformdev8716912495
         backendAzureRmContainerName: shared-infrastructure
         tfVarsFile: 'dev.tfvars'
+      - envName: stg
+        infrastructureName: SharedInfrastructure
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+        backendAzureRmResourceGroupName: rg-terraform-stg
+        backendAzureRmStorageAccountName: terraformstg4983265215
+        backendAzureRmContainerName: shared-infrastructure
+        tfVarsFile: 'stg.tfvars'        
       # - envName: 'stg'
       #   dependsOn: 'dev'
       #   infrastructureName: $(infrastructureName)
