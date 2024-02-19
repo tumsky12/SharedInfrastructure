@@ -18,31 +18,33 @@ variables:
   infrastructureName: SharedInfrastructure
   backendAzureRmContainerName: shared-tf-storage
 
-# jobs:
-# - job:
-#   steps:
-#   - task: TerraformCLI@1
-#     displayName: 'Terraform Init'
-#     inputs:
-#       command: init
-#       backendType: azurerm
-#       workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
-#       backendServiceArm: 'Workload Identity Federation Connection'
-#       ensureBackend: true
-#       backendAzureRmResourceGroupName: rg-terraform-dev
-#       backendAzureRmResourceGroupLocation: uksouth
-#       backendAzureRmStorageAccountName: foo
-#       backendAzureRmStorageAccountSku: 'Standard_RAGRS'
-#       backendAzureRmKey: 'terraform.tfstate'
-#       allowTelemetryCollection: true
+jobs:
+- job:
+  steps:
+  - task: TerraformCLI@1
+    displayName: 'Terraform Init'
+    inputs:
+      command: init
+      backendType: azurerm
+      workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
+      backendServiceArm: 'Workload Identity Federation Connection'
+      ensureBackend: true
+      backendAzureRmResourceGroupName: terraform-dev
+      backendAzureRmResourceGroupLocation: uksouth
+      backendAzureRmStorageAccountName: terraformdev8716912495
+      backendAzureRmContainerName: baa
+      backendAzureRmStorageAccountSku: 'Standard_RAGRS'
+      backendAzureRmKey: 'terraform.tfstate'
+      allowTelemetryCollection: true
 
-extends:
-  template: apply-env-template.yml@self
-  parameters:
-    environments:
-      - envName: 'dev'
-        infrastructureName: 'foo'
-        backendAzureRmResourceGroupName: rg-terraform-dev
+
+# extends:
+#   template: apply-env-template.yml@self
+#   parameters:
+#     environments:
+#       - envName: 'dev'
+#         infrastructureName: 'foo'
+#         backendAzureRmResourceGroupName: rg-terraform-dev
       # - envName: 'stg'
       #   dependsOn: 'dev'
       #   infrastructureName: $(infrastructureName)
