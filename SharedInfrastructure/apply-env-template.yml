@@ -6,7 +6,7 @@ parameters:
       dependsOn: []
       infrastructureName: 'infrastructureName'
       backendAzureRmResourceGroupName: 'backendAzureRmResourceGroupName'
-      tfVarsFileName: 'tfVarsFileName'
+      tfVarsFile: 'tfVarsFile'
 
 stages:
   - ${{ each env in parameters.environments}}:
@@ -19,4 +19,4 @@ stages:
           backendAzureRmResourceGroupName: rg-terraform-dev
           backendAzureRmStorageAccountName: terraformdev8716912495
           backendAzureRmContainerName: shared-infrastructure
-          planCommandOptions: '-var-file="EnvironmentVariables/${{ parameters.tfVarsFileName }}"'
+          planCommandOptions: '-var-file="EnvironmentVariables/${{ env.tfVarsFile }}"'
