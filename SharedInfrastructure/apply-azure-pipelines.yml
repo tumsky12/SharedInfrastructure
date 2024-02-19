@@ -20,15 +20,12 @@ extends:
       - envName: 'dev'
         infrastructureName: $(infrastructureName)
         backendAzureRmResourceGroupName: rg-terraform-dev
-        backendAzureRmContainerName: $(backendAzureRmContainerName)
       - envName: 'stg'
         dependsOn: 'dev'
         infrastructureName: $(infrastructureName)
         backendAzureRmResourceGroupName: rg-terraform-stg
-        backendAzureRmContainerName: $(backendAzureRmContainerName)        
       - envName: 'prd'
         dependsOn: 'stg'
         infrastructureName: $(infrastructureName)
         backendAzureRmResourceGroupName: rg-terraform-prd
-        backendAzureRmContainerName: $(backendAzureRmContainerName)
 
