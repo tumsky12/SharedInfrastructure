@@ -15,8 +15,8 @@ stages:
   - ${{ each env in parameters.environments}}:
     - stage: ${{ env.envName }}
       dependsOn: ${{ env.dependsOn }}
-      condition: eq(${{ env.dependsOn }}, [])
-      #, succeeded('${{ env.dependsOn }}'))
+      ${{ if env.dependsOn }}:
+        condition: succeeded('${{ env.dependsOn }}'))
       jobs: 
       - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
         parameters:
