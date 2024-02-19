@@ -22,7 +22,7 @@ jobs:
 - job:
   steps:
   - task: TerraformCLI@1
-    displayName: 'Terraform Init ${{ parameters.name }}'
+    displayName: 'Terraform Init'
     inputs:
       command: init
       backendType: azurerm
