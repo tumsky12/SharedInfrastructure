@@ -2,7 +2,7 @@ trigger: none
 
 resources:
   repositories:
-    - repository: templates
+    - repository: corePipelineTemplates
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
