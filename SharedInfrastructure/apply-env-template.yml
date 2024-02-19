@@ -17,3 +17,10 @@ stages:
           dependsOn: ${{ env.dependsOn }}
           workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
           backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
+          name: 'foo'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
+          backendAzureRmResourceGroupName: terraform-dev
+          backendAzureRmResourceGroupLocation: uksouth
+          backendAzureRmStorageAccountName: terraformdev8716912495
+          backendAzureRmContainerName: baa
+          backendAzureRmKey: terraform.tfstate
