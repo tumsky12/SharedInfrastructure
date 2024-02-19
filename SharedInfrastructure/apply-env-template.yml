@@ -19,4 +19,4 @@ stages:
           backendAzureRmResourceGroupName: rg-terraform-dev
           backendAzureRmStorageAccountName: terraformdev8716912495
           backendAzureRmContainerName: shared-infrastructure
-          planCommandOptions: '-var-file="dev.tfvars"'
+          planCommandOptions: '-var-file="EnvironmentVariables/${{ parameters.tfVarsFileName }}"'
