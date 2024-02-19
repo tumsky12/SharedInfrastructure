@@ -5,7 +5,10 @@ parameters:
       envName: 'name'
       dependsOn: []
       infrastructureName: 'infrastructureName'
+      workingDirectory: 'workingDirectory'
       backendAzureRmResourceGroupName: 'backendAzureRmResourceGroupName'
+      backendAzureRmStorageAccountName: 'backendAzureRmStorageAccountName'
+      backendAzureRmContainerName: 'backendAzureRmContainerName'
       tfVarsFile: 'tfVarsFile'
 
 stages:
@@ -14,9 +17,9 @@ stages:
       jobs: 
       - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
         parameters:
-          name: SharedInfrastructure
-          workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-          backendAzureRmResourceGroupName: rg-terraform-dev
-          backendAzureRmStorageAccountName: terraformdev8716912495
-          backendAzureRmContainerName: shared-infrastructure
+          name: ${{ env.infrastructureName }}
+          workingDirectory: ${{ env.workingDirectory }}
+          backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
+          backendAzureRmStorageAccountName: ${{ env.backendAzureRmStorageAccountName }}
+          backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}
           planCommandOptions: '-var-file="EnvironmentVariables/${{ env.tfVarsFile }}"'

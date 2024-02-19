@@ -16,8 +16,3 @@ variable "resource_environment" {
     error_message = "The environment must be either 'dev', 'stg' or 'prd'."
   }
 }
-
-variable "container_registry_name" {
-  default     = "sharedContainerRegistryProd"
-  description = "Name of the container registry."
-}

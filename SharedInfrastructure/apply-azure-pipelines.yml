@@ -30,9 +30,12 @@ extends:
   template: apply-env-template.yml@self
   parameters:
     environments:
-      - envName: 'dev'
-        infrastructureName: 'foo'
+      - envName: dev
+        infrastructureName: SharedInfrastructure
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmResourceGroupName: rg-terraform-dev
+        backendAzureRmStorageAccountName: terraformdev8716912495
+        backendAzureRmContainerName: shared-infrastructure
         tfVarsFile: 'dev.tfvars'
       # - envName: 'stg'
       #   dependsOn: 'dev'
