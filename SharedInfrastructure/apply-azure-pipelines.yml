@@ -18,14 +18,14 @@ extends:
   parameters:
     environments:
       - envName: 'dev'
-        infrastructureName: $(infrastructureName)
+        infrastructureName: 'foo'
         backendAzureRmResourceGroupName: rg-terraform-dev
-      - envName: 'stg'
-        dependsOn: 'dev'
-        infrastructureName: $(infrastructureName)
-        backendAzureRmResourceGroupName: rg-terraform-stg
-      - envName: 'prd'
-        dependsOn: 'stg'
-        infrastructureName: $(infrastructureName)
-        backendAzureRmResourceGroupName: rg-terraform-prd
+      # - envName: 'stg'
+      #   dependsOn: 'dev'
+      #   infrastructureName: $(infrastructureName)
+      #   backendAzureRmResourceGroupName: rg-terraform-stg
+      # - envName: 'prd'
+      #   dependsOn: 'stg'
+      #   infrastructureName: $(infrastructureName)
+      #   backendAzureRmResourceGroupName: rg-terraform-prd
 
