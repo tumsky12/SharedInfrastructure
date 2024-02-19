@@ -17,4 +17,4 @@ stages:
           workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
           backendAzureRmResourceGroupName: rg-terraform-dev
           backendAzureRmStorageAccountName: terraformdev8716912495
-          backendAzureRmContainerName: SharedInfrastructure
+          backendAzureRmContainerName: shared-infrastructure
