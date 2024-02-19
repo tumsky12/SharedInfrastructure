@@ -13,10 +13,6 @@ stages:
       jobs: 
       - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
         parameters:
-          name: ${{ env.infrastructureName }}
-          dependsOn: ${{ env.dependsOn }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
-          backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
           name: 'foo'
           workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
           backendAzureRmResourceGroupName: terraform-dev
