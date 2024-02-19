@@ -14,6 +14,7 @@ parameters:
 stages:
   - ${{ each env in parameters.environments}}:
     - stage: ${{ env.envName }}
+      dependsOn: ${{ env.dependsOn }}
       jobs: 
       - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
         parameters:

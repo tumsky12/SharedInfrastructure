@@ -38,20 +38,21 @@ extends:
         backendAzureRmContainerName: shared-infrastructure
         tfVarsFile: 'dev.tfvars'
       - envName: stg
+        dependsOn: dev
         infrastructureName: SharedInfrastructure
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmResourceGroupName: rg-terraform-stg
         backendAzureRmStorageAccountName: terraformstg4983265215
         backendAzureRmContainerName: shared-infrastructure
         tfVarsFile: 'stg.tfvars'        
-      # - envName: 'stg'
-      #   dependsOn: 'dev'
-      #   infrastructureName: $(infrastructureName)
-      #   backendAzureRmResourceGroupName: rg-terraform-stg
-      # - envName: 'prd'
-      #   dependsOn: 'stg'
-      #   infrastructureName: $(infrastructureName)
-      #   backendAzureRmResourceGroupName: rg-terraform-prd
+      - envName: prd
+        dependsOn: stg
+        infrastructureName: SharedInfrastructure
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+        backendAzureRmResourceGroupName: rg-terraform-prd
+        backendAzureRmStorageAccountName: terraformprd1784531786
+        backendAzureRmContainerName: shared-infrastructure
+        tfVarsFile: 'prd.tfvars'       
       
 # jobs:
 # - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
