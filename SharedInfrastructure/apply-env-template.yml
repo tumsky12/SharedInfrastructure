@@ -13,10 +13,8 @@ stages:
       jobs: 
       - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
         parameters:
-          name: 'foo'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
-          backendAzureRmResourceGroupName: terraform-dev
-          backendAzureRmResourceGroupLocation: uksouth
+          name: SharedInfrastructure
+          workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+          backendAzureRmResourceGroupName: rg-terraform-dev
           backendAzureRmStorageAccountName: terraformdev8716912495
-          backendAzureRmContainerName: baa
-          backendAzureRmKey: terraform.tfstate
+          backendAzureRmContainerName: SharedInfrastructure

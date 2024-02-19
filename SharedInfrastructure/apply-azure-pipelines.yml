@@ -26,29 +26,47 @@ variables:
   infrastructureName: SharedInfrastructure
   backendAzureRmContainerName: shared-tf-storage
 
-jobs:
-- template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
+extends:
+  template: apply-env-template.yml@self
   parameters:
-    name: 'foo'
-    workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-    environmentServiceName: 'Workload Identity Federation Connection'
-    backendAzureRmResourceGroupName: terraform-dev
-    backendAzureRmResourceGroupLocation: uksouth
-    backendAzureRmStorageAccountName: terraformdev8716912495
-    backendAzureRmContainerName: baa
-    backendAzureRmKey: terraform.tfstate
-- job:
-  steps:
-  - template: Templates\Steps\Terraform\terraform-init-step.yml@corePipelineTemplates
-    parameters:
-      name: 'foo'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
-      environmentServiceName: 'Workload Identity Federation Connection'
-      backendAzureRmResourceGroupName: terraform-dev
-      backendAzureRmResourceGroupLocation: uksouth
-      backendAzureRmStorageAccountName: terraformdev8716912495
-      backendAzureRmContainerName: baa
-      backendAzureRmKey: terraform.tfstate
+    environments:
+      - envName: 'dev'
+        infrastructureName: 'foo'
+        backendAzureRmResourceGroupName: rg-terraform-dev
+      # - envName: 'stg'
+      #   dependsOn: 'dev'
+      #   infrastructureName: $(infrastructureName)
+      #   backendAzureRmResourceGroupName: rg-terraform-stg
+      # - envName: 'prd'
+      #   dependsOn: 'stg'
+      #   infrastructureName: $(infrastructureName)
+      #   backendAzureRmResourceGroupName: rg-terraform-prd
+      
+# jobs:
+# - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
+#   parameters:
+#     name: 'foo'
+#     workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+#     environmentServiceName: 'Workload Identity Federation Connection'
+#     backendAzureRmResourceGroupName: terraform-dev
+#     backendAzureRmResourceGroupLocation: uksouth
+#     backendAzureRmStorageAccountName: terraformdev8716912495
+#     backendAzureRmContainerName: baa
+#     backendAzureRmKey: terraform.tfstate
+
+
+# - job:
+#   steps:
+#   - template: Templates\Steps\Terraform\terraform-init-step.yml@corePipelineTemplates
+#     parameters:
+#       name: 'foo'
+#       workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
+#       environmentServiceName: 'Workload Identity Federation Connection'
+#       backendAzureRmResourceGroupName: terraform-dev
+#       backendAzureRmResourceGroupLocation: uksouth
+#       backendAzureRmStorageAccountName: terraformdev8716912495
+#       backendAzureRmContainerName: baa
+#       backendAzureRmKey: terraform.tfstate
 
       # backendAzureRmResourceGroupName: terraform-dev
       # backendAzureRmResourceGroupLocation: uksouth
@@ -72,19 +90,5 @@ jobs:
   #     allowTelemetryCollection: true
 
 
-# extends:
-#   template: apply-env-template.yml@self
-#   parameters:
-#     environments:
-#       - envName: 'dev'
-#         infrastructureName: 'foo'
-#         backendAzureRmResourceGroupName: rg-terraform-dev
-      # - envName: 'stg'
-      #   dependsOn: 'dev'
-      #   infrastructureName: $(infrastructureName)
-      #   backendAzureRmResourceGroupName: rg-terraform-stg
-      # - envName: 'prd'
-      #   dependsOn: 'stg'
-      #   infrastructureName: $(infrastructureName)
-      #   backendAzureRmResourceGroupName: rg-terraform-prd
+
 
