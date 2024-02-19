@@ -6,7 +6,6 @@ parameters:
       dependsOn: []
       infrastructureName: 'infrastructureName'
       backendAzureRmResourceGroupName: 'backendAzureRmResourceGroupName'
-      backendAzureRmContainerName: 'backendAzureRmContainerName'
 
 stages:
   - ${{ each env in parameters.environments}}:
@@ -18,4 +17,3 @@ stages:
           dependsOn: ${{ env.dependsOn }}
           workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/Terraform'
           backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
-          backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}
