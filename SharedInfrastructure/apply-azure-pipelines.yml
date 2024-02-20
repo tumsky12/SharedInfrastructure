@@ -27,7 +27,7 @@ variables:
   backendAzureRmContainerName: shared-tf-storage
 
 extends:
-  template: terraform-apply-envs-stage@self
+  template: terraform-apply-envs-stage.yml@self
   parameters:
     environments:
       - envName: dev
