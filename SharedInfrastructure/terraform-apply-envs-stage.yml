@@ -20,7 +20,7 @@ stages:
       ${{ if env.dependsOn }}:
         condition: succeeded('${{ env.dependsOn }}')
       jobs: 
-      - ${{ if eq(true, true) }}:      
+      - ${{ if eq(parameters.destroy, false) }}:      
         - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
           parameters:
             name: ${{ env.infrastructureName }}
@@ -29,3 +29,12 @@ stages:
             backendAzureRmStorageAccountName: ${{ env.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}
             planCommandOptions: '-var-file="EnvironmentVariables/${{ env.tfVarsFile }}"'
+      - ${{ else }}:      
+        - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
+          parameters:
+            name: ${{ env.infrastructureName }}
+            workingDirectory: ${{ env.workingDirectory }}
+            backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
+            backendAzureRmStorageAccountName: ${{ env.backendAzureRmStorageAccountName }}
+            backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}
+            planCommandOptions: '-var-file="EnvironmentVariables/${{ env.tfVarsFile }}"'            
