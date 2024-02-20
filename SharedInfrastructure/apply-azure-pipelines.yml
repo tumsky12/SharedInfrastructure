@@ -6,7 +6,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref:  'refs/heads/feature/multiple-environment-deployment'
+      ref:  'refs/heads/feature/multiple-environment-deployment2'
       # ref: refs/tags/1.0.1
     - repository: terraformModules
       type: github
