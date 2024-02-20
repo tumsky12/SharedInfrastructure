@@ -32,7 +32,7 @@ variables:
 extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
-    destroy: asdf
+    destroy: false
     environments:
       # - envName: dev
       #   infrastructureName: ${{ variables.infrastructureName }}
