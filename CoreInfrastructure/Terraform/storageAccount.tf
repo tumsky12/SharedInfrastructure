@@ -1,8 +1,3 @@
-resource "random_integer" "random" {
-  min = 10000
-  max = 99999
-}
-
 module "sa" {
   source                           = "../../../CoreTerraformModules/Modules/StorageAccount"
   resource_group_location          = azurerm_resource_group.rg.location

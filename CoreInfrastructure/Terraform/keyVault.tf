@@ -1,8 +1,3 @@
-resource "random_integer" "random" {
-  min = 10000
-  max = 99999
-}
-
 module "kv" {
   source                  = "../../../CoreTerraformModules/Modules/KeyVault"
   resource_group_location = azurerm_resource_group.rg.location
