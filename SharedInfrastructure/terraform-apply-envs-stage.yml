@@ -30,7 +30,7 @@ stages:
             backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}
             planCommandOptions: '-var-file="EnvironmentVariables/${{ env.tfVarsFile }}"'
       - ${{ else }}:      
-        - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
+        - template: Templates\Jobs\Terraform\terraform-destroy-job.yml@corePipelineTemplates
           parameters:
             name: ${{ env.infrastructureName }}
             workingDirectory: ${{ env.workingDirectory }}
