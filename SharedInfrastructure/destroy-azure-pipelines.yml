@@ -15,8 +15,9 @@ resources:
       ref: refs/tags/1.0.0
 
 variables:
+- group: shared-variable-group
   infrastructureName: SharedInfrastructure
-  workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform'
+  workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
   backendAzureRmContainerName: shared-infrastructure
   devTfVarsFile: dev.tfvars
   stgTfVarsFile: stg.tfvars
@@ -30,23 +31,24 @@ extends:
       - envName: dev
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: ${{ variables.devBackendAzureRmResourceGroupName }}
-        backendAzureRmStorageAccountName: ${{ variables.devBackendAzureRmStorageAccountName }}
+        backendAzureRmResourceGroupName: $(variables.devBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(variables.devBackendAzureRmStorageAccountName)
+
         backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
         tfVarsFile: ${{ variables.devTfVarsFile }}
       - envName: stg
         dependsOn: dev
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: ${{ variables.stgBackendAzureRmResourceGroupName }}
-        backendAzureRmStorageAccountName: ${{ variables.stgBackendAzureRmStorageAccountName }}
+        backendAzureRmResourceGroupName: $(variables.stgBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(variables.stgBackendAzureRmStorageAccountName)
         backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
         tfVarsFile: ${{ variables.stgTfVarsFile }}        
       - envName: prd
         dependsOn: stg
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: ${{ variables.prdBackendAzureRmResourceGroupName }}
-        backendAzureRmStorageAccountName: ${{ variables.prdBackendAzureRmStorageAccountName }}
+        backendAzureRmResourceGroupName: $(variables.prdBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(variables.prdBackendAzureRmStorageAccountName)
         backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
         tfVarsFile: ${{ variables.prdTfVarsFile }}       
