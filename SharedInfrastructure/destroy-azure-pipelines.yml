@@ -6,6 +6,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
+      ref:  'refs/heads/multiple-environment-deployment'
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
@@ -27,7 +28,7 @@ variables:
   backendAzureRmContainerName: shared-tf-storage
 
 extends:
-  template: terraform-apply-envs-stage.yml@self
+  template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
     destroy: true
     environments:
