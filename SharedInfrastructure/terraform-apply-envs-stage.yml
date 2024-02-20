@@ -1,55 +1,28 @@
-trigger: none
+parameters:
+  - name: environments
+    type: object
+    default:
+      envName: 'name'
+      dependsOn: []
+      infrastructureName: 'infrastructureName'
+      workingDirectory: 'workingDirectory'
+      backendAzureRmResourceGroupName: 'backendAzureRmResourceGroupName'
+      backendAzureRmStorageAccountName: 'backendAzureRmStorageAccountName'
+      backendAzureRmContainerName: 'backendAzureRmContainerName'
+      tfVarsFile: 'tfVarsFile'
 
-resources:
-  repositories:
-    - repository: corePipelineTemplates
-      type: github
-      name: tumsky12/CorePipelineTemplates
-      endpoint: GitHubConnection
-    - repository: terraformModules
-      type: github
-      name: tumsky12/CoreTerraformModules
-      endpoint: GitHubConnection
-    # - repository: corePipelineTemplates
-    #   type: github
-    #   name: tumsky12/CorePipelineTemplates
-    #   ref: refs/tags/1.0.0
-    #   # ref:  'refs/heads/init-changes'
-    #   endpoint: GitHubConnection
-    # - repository: terraformModules
-    #   type: github
-    #   name: tumsky12/CoreTerraformModules
-    #   ref:  'refs/heads/main'
-    #   endpoint: GitHubConnection
-
-variables:
-  infrastructureName: SharedInfrastructure
-  backendAzureRmContainerName: shared-tf-storage
-
-extends:
-  template: terraform-apply-envs-stage@self
-  parameters:
-    environments:
-      - envName: dev
-        infrastructureName: SharedInfrastructure
-        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-        backendAzureRmResourceGroupName: rg-terraform-dev
-        backendAzureRmStorageAccountName: terraformdev8716912495
-        backendAzureRmContainerName: shared-infrastructure
-        tfVarsFile: 'dev.tfvars'
-      - envName: stg
-        dependsOn: dev
-        infrastructureName: SharedInfrastructure
-        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-        backendAzureRmResourceGroupName: rg-terraform-stg
-        backendAzureRmStorageAccountName: terraformstg4983265215
-        backendAzureRmContainerName: shared-infrastructure
-        tfVarsFile: 'stg.tfvars'        
-      # - envName: prd
-      #   dependsOn: stg
-      #   infrastructureName: SharedInfrastructure
-      #   workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-      #   backendAzureRmResourceGroupName: rg-terraform-prd
-      #   backendAzureRmStorageAccountName: terraformprd1784531786
-      #   backendAzureRmContainerName: shared-infrastructure
-      #   tfVarsFile: 'prd.tfvars'       
+stages:
+  - ${{ each env in parameters.environments}}:
+    - stage: ${{ env.envName }}
+      dependsOn: ${{ env.dependsOn }}
+      ${{ if env.dependsOn }}:
+        condition: succeeded('${{ env.dependsOn }}')
+      jobs: 
+      - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
+        parameters:
+          name: ${{ env.infrastructureName }}
+          workingDirectory: ${{ env.workingDirectory }}
+          backendAzureRmResourceGroupName: ${{ env.backendAzureRmResourceGroupName }}
+          backendAzureRmStorageAccountName: ${{ env.backendAzureRmStorageAccountName }}
+          backendAzureRmContainerName: ${{ env.backendAzureRmContainerName }}
+          planCommandOptions: '-var-file="EnvironmentVariables/${{ env.tfVarsFile }}"'
