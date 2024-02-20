@@ -15,12 +15,12 @@ resources:
       ref: refs/tags/1.0.0
 
 variables:
-- infrastructureName: SharedInfrastructure
-- workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-- backendAzureRmContainerName: shared-infrastructure
-- devTfVarsFile: dev.tfvars
-- stgTfVarsFile: stg.tfvars
-- prdTfVarsFile: prd.tfvars
+  infrastructureName: SharedInfrastructure
+  workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+  backendAzureRmContainerName: shared-infrastructure
+  devTfVarsFile: dev.tfvars
+  stgTfVarsFile: stg.tfvars
+  prdTfVarsFile: prd.tfvars
 
 extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
@@ -28,7 +28,7 @@ extends:
     destroy: true
     environments:
       - envName: dev
-        infrastructureName: $(infrastructureName)
+        infrastructureName: SharedInfrastructure
         workingDirectory: $(workingDirectory)
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
