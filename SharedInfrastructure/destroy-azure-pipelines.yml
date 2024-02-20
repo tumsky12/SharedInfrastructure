@@ -15,7 +15,7 @@ resources:
       ref: refs/tags/1.0.0
 
 variables:
-  infrastructureName: 'SharedInfrastructure'
+  infrastructureName: SharedInfrastructure
   workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
   backendAzureRmContainerName: shared-infrastructure
   devTfVarsFile: dev.tfvars
@@ -36,7 +36,7 @@ extends:
         tfVarsFile: $(devTfVarsFile)
       - envName: stg
         dependsOn: dev
-        infrastructureName: $(infrastructureName)
+        infrastructureName: SharedInfrastructure
         workingDirectory: $(workingDirectory)
         backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
@@ -44,7 +44,7 @@ extends:
         tfVarsFile: $(stgTfVarsFile)        
       - envName: prd
         dependsOn: stg
-        infrastructureName: $(infrastructureName)
+        infrastructureName: SharedInfrastructure
         workingDirectory: $(workingDirectory)
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
