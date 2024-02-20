@@ -27,7 +27,7 @@ variables:
   backendAzureRmContainerName: shared-tf-storage
 
 extends:
-  template: terraform-destroy-envs-stage@self
+  template: terraform-apply-envs-stage@self
   parameters:
     environments:
       - envName: dev
