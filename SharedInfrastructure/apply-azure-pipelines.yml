@@ -34,23 +34,23 @@ extends:
   parameters:
     destroy: false
     environments:
-      - envName: dev
-        infrastructureName: ${{ variables.infrastructureName }}
-        workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
-        backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-        tfVarsFile: ${{ variables.devTfVarsFile }}
-      - envName: stg
-        dependsOn: dev
-        infrastructureName: ${{ variables.infrastructureName }}
-        workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
-        backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-        tfVarsFile: ${{ variables.stgTfVarsFile }}        
+      # - envName: dev
+      #   infrastructureName: ${{ variables.infrastructureName }}
+      #   workingDirectory: ${{ variables.workingDirectory }}
+      #   backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
+      #   backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
+      #   backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+      #   tfVarsFile: ${{ variables.devTfVarsFile }}
+      # - envName: stg
+      #   dependsOn: dev
+      #   infrastructureName: ${{ variables.infrastructureName }}
+      #   workingDirectory: ${{ variables.workingDirectory }}
+      #   backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
+      #   backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
+      #   backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+      #   tfVarsFile: ${{ variables.stgTfVarsFile }}        
       - envName: prd
-        dependsOn: stg
+        # dependsOn: stg
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
