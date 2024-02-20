@@ -8,6 +8,6 @@ jobs:
 - template: ../PipelineTemplates/Jobs/Terraform/terraform-apply-job.yml
   parameters:
     name: ${{ parameters.name }}
-    terraformWorkingDir: '$(System.DefaultWorkingDirectory)/VirtualMachineInfrastructure/Terraform'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/VirtualMachineInfrastructure/Terraform'
     backendAzureRmContainerName: 'shared-vm-tf-storage'
     dependsOn: ${{ parameters.dependsOn }}
