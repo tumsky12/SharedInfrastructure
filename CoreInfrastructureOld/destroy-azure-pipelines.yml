@@ -1,0 +1,10 @@
+trigger: none
+
+resources:
+- repo: self
+
+jobs:
+- template: destroy-core-infrastructure-job.yml
+  parameters:
+    name: 'Core'
+

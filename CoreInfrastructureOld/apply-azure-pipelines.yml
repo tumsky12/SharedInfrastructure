@@ -1,0 +1,9 @@
+trigger: none
+
+resources:
+- repo: self
+
+jobs:
+- template: apply-core-infrastructure-job.yml
+  parameters:
+    name: 'Core'
