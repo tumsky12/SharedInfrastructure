@@ -5,52 +5,55 @@ resources:
     - repository: corePipelineTemplates
       type: github
       name: tumsky12/CorePipelineTemplates
-      ref:  'refs/heads/multiple-environment-deployment'
       endpoint: GitHubConnection
+      ref:  'refs/heads/feature/multiple-environment-deployment'
+      # ref: refs/tags/1.0.1
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
       endpoint: GitHubConnection
-    # - repository: corePipelineTemplates
-    #   type: github
-    #   name: tumsky12/CorePipelineTemplates
-    #   ref: refs/tags/1.0.0
-    #   # ref:  'refs/heads/init-changes'
-    #   endpoint: GitHubConnection
-    # - repository: terraformModules
-    #   type: github
-    #   name: tumsky12/CoreTerraformModules
-    #   ref:  'refs/heads/main'
-    #   endpoint: GitHubConnection
+      ref: refs/tags/1.0.0
 
 variables:
-  infrastructureName: SharedInfrastructure
-  backendAzureRmContainerName: shared-tf-storage
+- group: shared-variable-group
+- name: infrastructureName
+  value: SharedInfrastructure
+- name: workingDirectory
+  value: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+- name: backendAzureRmContainerName
+  value: shared-infrastructure
+- name: devTfVarsFile
+  value: dev.tfvars
+- name: stgTfVarsFile
+  value: stg.tfvars
+- name: prdTfVarsFile
+  value: prd.tfvars
 
 extends:
-  template: terraform-apply-envs-stage.yml@self
+  template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
+    destroy: false
     environments:
       - envName: dev
-        infrastructureName: SharedInfrastructure
-        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-        backendAzureRmResourceGroupName: rg-terraform-dev
-        backendAzureRmStorageAccountName: terraformdev8716912495
-        backendAzureRmContainerName: shared-infrastructure
-        tfVarsFile: 'dev.tfvars'
+        infrastructureName: ${{ variables.infrastructureName }}
+        workingDirectory: ${{ variables.workingDirectory }}
+        backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
+        backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+        tfVarsFile: ${{ variables.devTfVarsFile }}
       - envName: stg
         dependsOn: dev
-        infrastructureName: SharedInfrastructure
-        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-        backendAzureRmResourceGroupName: rg-terraform-stg
-        backendAzureRmStorageAccountName: terraformstg4983265215
-        backendAzureRmContainerName: shared-infrastructure
-        tfVarsFile: 'stg.tfvars'        
-      # - envName: prd
-      #   dependsOn: stg
-      #   infrastructureName: SharedInfrastructure
-      #   workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-      #   backendAzureRmResourceGroupName: rg-terraform-prd
-      #   backendAzureRmStorageAccountName: terraformprd1784531786
-      #   backendAzureRmContainerName: shared-infrastructure
-      #   tfVarsFile: 'prd.tfvars'       
+        infrastructureName: ${{ variables.infrastructureName }}
+        workingDirectory: ${{ variables.workingDirectory }}
+        backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
+        backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+        tfVarsFile: ${{ variables.stgTfVarsFile }}        
+      - envName: prd
+        dependsOn: stg
+        infrastructureName: ${{ variables.infrastructureName }}
+        workingDirectory: ${{ variables.workingDirectory }}
+        backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
+        backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+        tfVarsFile: ${{ variables.prdTfVarsFile }}       
