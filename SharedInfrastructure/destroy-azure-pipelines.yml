@@ -16,12 +16,18 @@ resources:
 
 variables:
 - group: shared-variable-group
-  infrastructureName: SharedInfrastructure
-  workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-  backendAzureRmContainerName: shared-infrastructure
-  devTfVarsFile: dev.tfvars
-  stgTfVarsFile: stg.tfvars
-  prdTfVarsFile: prd.tfvars
+- name: infrastructureName
+  value: SharedInfrastructure
+- name: workingDirectory
+  value: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+- name: backendAzureRmContainerName
+  value: shared-infrastructure
+- name: devTfVarsFile
+  value: dev.tfvars
+- name: stgTfVarsFile
+  value: stg.tfvars
+- name: prdTfVarsFile
+  value: prd.tfvars
 
 extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
