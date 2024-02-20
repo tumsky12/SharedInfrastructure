@@ -15,7 +15,7 @@ resources:
       ref: refs/tags/1.0.0
 
 variables:
-  infrastructureName: SharedInfrastructure
+  infrastructureName: 'SharedInfrastructure'
   workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
   backendAzureRmContainerName: shared-infrastructure
   devTfVarsFile: dev.tfvars
