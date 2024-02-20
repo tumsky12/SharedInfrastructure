@@ -16,7 +16,7 @@ resources:
 
 variables:
   infrastructureName: SharedInfrastructure
-  workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+  workingDirectory: '$(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform'
   backendAzureRmContainerName: shared-infrastructure
   devTfVarsFile: dev.tfvars
   stgTfVarsFile: stg.tfvars
@@ -28,7 +28,7 @@ extends:
     destroy: true
     environments:
       - envName: dev
-        infrastructureName: SharedInfrastructure
+        infrastructureName: '$(infrastructureName)'
         workingDirectory: $(workingDirectory)
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
@@ -36,7 +36,7 @@ extends:
         tfVarsFile: $(devTfVarsFile)
       - envName: stg
         dependsOn: dev
-        infrastructureName: SharedInfrastructure
+        infrastructureName: '$(infrastructureName)'
         workingDirectory: $(workingDirectory)
         backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
@@ -44,7 +44,7 @@ extends:
         tfVarsFile: $(stgTfVarsFile)        
       - envName: prd
         dependsOn: stg
-        infrastructureName: SharedInfrastructure
+        infrastructureName: '$(infrastructureName)'
         workingDirectory: $(workingDirectory)
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
