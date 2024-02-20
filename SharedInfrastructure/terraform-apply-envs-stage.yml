@@ -20,7 +20,7 @@ stages:
       ${{ if env.dependsOn }}:
         condition: succeeded('${{ env.dependsOn }}')
       jobs: 
-      - ${{ not(parameters.destroy) }}:      
+      - ${{ if not(parameters.destroy) }}:      
         - template: Templates\Jobs\Terraform\terraform-apply-job.yml@corePipelineTemplates
           parameters:
             name: ${{ env.infrastructureName }}
