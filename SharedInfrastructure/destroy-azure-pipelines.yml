@@ -37,24 +37,23 @@ extends:
       - envName: dev
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: $(variables.devBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $(variables.devBackendAzureRmStorageAccountName)
-
+        backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
         backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
         tfVarsFile: ${{ variables.devTfVarsFile }}
       - envName: stg
         dependsOn: dev
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: $(variables.stgBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $(variables.stgBackendAzureRmStorageAccountName)
+        backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
         backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
         tfVarsFile: ${{ variables.stgTfVarsFile }}        
       - envName: prd
         dependsOn: stg
         infrastructureName: ${{ variables.infrastructureName }}
         workingDirectory: ${{ variables.workingDirectory }}
-        backendAzureRmResourceGroupName: $(variables.prdBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $(variables.prdBackendAzureRmStorageAccountName)
+        backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
         backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
         tfVarsFile: ${{ variables.prdTfVarsFile }}       
