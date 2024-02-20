@@ -29,6 +29,7 @@ variables:
 extends:
   template: terraform-apply-envs-stage.yml@self
   parameters:
+    destroy: true
     environments:
       - envName: dev
         infrastructureName: SharedInfrastructure
