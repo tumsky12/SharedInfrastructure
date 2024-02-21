@@ -48,7 +48,7 @@ extends:
     infrastructureGroups:
       - infrastructureName: SharedInfrastructure
         dependsOn: []
-        deployOn: [prd]
+        deployOn: [dev, prd]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmContainerName: shared-infrastructure
 
