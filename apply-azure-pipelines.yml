@@ -54,7 +54,7 @@ extends:
 
       - infrastructureName: CoreInfrastructure
         dependsOn: []
-        deployOn: []
+        deployOn: [dev, stg, prd]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
         backendAzureRmContainerName: core-infrastructure
             
