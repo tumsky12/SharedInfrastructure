@@ -11,7 +11,7 @@ resources:
       type: github
       name: tumsky12/CoreTerraformModules
       endpoint: GitHubConnection
-      ref: refs/tags/1.0.2
+      ref: refs/heads/feature/multiple-env-and-infra
 
 variables:
 - group: shared-variable-group
@@ -49,9 +49,11 @@ extends:
       #   tfVarsFile: ${{ variables.stgTfVarsFile }}        
       - envName: prd
         # dependsOn: stg
-        infrastructureName: ${{ variables.infrastructureName }}
-        workingDirectory: ${{ variables.workingDirectory }}
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
-        backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-        tfVarsFile: ${{ variables.prdTfVarsFile }}       
+        infrastructure:
+          - infrastructureName: ${{ variables.infrastructureName }}
+            dependsOn: []
+            workingDirectory: ${{ variables.workingDirectory }}
+            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+            tfVarsFile: ${{ variables.prdTfVarsFile }}
