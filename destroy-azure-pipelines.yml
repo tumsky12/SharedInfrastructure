@@ -26,7 +26,7 @@ variables:
 extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
-    destroy: false
+    destroy: true
     environments:
       - envName: dev
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
