@@ -28,36 +28,33 @@ extends:
   parameters:
     destroy: false
     environments:
-      # - envName: dev
-      #   infrastructureName: ${{ variables.infrastructureName }}
-      #   workingDirectory: ${{ variables.workingDirectory }}
-      #   backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
-      #   backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
-      #   backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-      #   tfVarsFile: ${{ variables.devTfVarsFile }}
-      # - envName: stg
-      #   dependsOn: dev
-      #   infrastructureName: ${{ variables.infrastructureName }}
-      #   workingDirectory: ${{ variables.workingDirectory }}
-      #   backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
-      #   backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
-      #   backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-      #   tfVarsFile: ${{ variables.stgTfVarsFile }}        
+      - envName: dev
+        backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $devBackendAzureRmStorageAccountName)
+        tfVarsFile: ${{ variables.devTfVarsFile }}
+
+      - envName: stg
+        dependsOn: dev
+        backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
+        tfVarsFile: ${{ variables.stgTfVarsFile }}
+
       - envName: prd
-        # dependsOn: stg
+        dependsOn: stg
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
+        tfVarsFile: ${{ variables.prdTfVarsFile }}
 
     infrastructureGroups:
       - infrastructureName: SharedInfrastructure
         dependsOn: []
+        deployOn: [prd]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmContainerName: shared-infrastructure
-        tfVarsFile: ${{ variables.prdTfVarsFile }}
 
       - infrastructureName: CoreInfrastructure
         dependsOn: []
+        deployOn: []
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
         backendAzureRmContainerName: core-infrastructure
-        tfVarsFile: ${{ variables.prdTfVarsFile }}        
             
