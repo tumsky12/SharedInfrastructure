@@ -30,7 +30,7 @@ extends:
     environments:
       - envName: dev
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $devBackendAzureRmStorageAccountName)
+        backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
         tfVarsFile: ${{ variables.devTfVarsFile }}
 
       - envName: stg
@@ -54,7 +54,7 @@ extends:
 
       - infrastructureName: CoreInfrastructure
         dependsOn: []
-        deployOn: [dev, stg, prd]
+        deployOn: []
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
         backendAzureRmContainerName: core-infrastructure
             
