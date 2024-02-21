@@ -6,12 +6,12 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/tags/1.0.2
+      ref: refs/heads/feature/multiple-env-and-infra
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
       endpoint: GitHubConnection
-      ref: refs/heads/feature/multiple-env-and-infra
+      ref: refs/tags/1.0.2
 
 variables:
 - group: shared-variable-group
@@ -57,3 +57,4 @@ extends:
             workingDirectory: ${{ variables.workingDirectory }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             tfVarsFile: ${{ variables.prdTfVarsFile }}
+            
