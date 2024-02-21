@@ -15,11 +15,7 @@ resources:
 
 variables:
 - group: shared-variable-group
-- name: CoreInfrastructure
-- name: workingDirectory
-  value: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
-- name: backendAzureRmContainerName
-  value: core-infrastructure
+
 - name: devTfVarsFile
   value: dev.tfvars
 - name: stgTfVarsFile
@@ -51,10 +47,17 @@ extends:
         # dependsOn: stg
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
-        infrastructure:
-          - infrastructureName: ${{ variables.infrastructureName }}
-            dependsOn: []
-            workingDirectory: ${{ variables.workingDirectory }}
-            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-            tfVarsFile: ${{ variables.prdTfVarsFile }}
+
+    infrastructureGroups:
+      - infrastructureName: SharedInfrastructure
+        dependsOn: []
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+        backendAzureRmContainerName: shared-infrastructure
+        tfVarsFile: ${{ variables.prdTfVarsFile }}
+
+      - infrastructureName: CoreInfrastructure
+        dependsOn: []
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
+        backendAzureRmContainerName: core-infrastructure
+        tfVarsFile: ${{ variables.prdTfVarsFile }}        
             
