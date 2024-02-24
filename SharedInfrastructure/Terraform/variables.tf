@@ -8,6 +8,16 @@ variable "resource_prefix" {
   description = "Prefix of the resource."
 }
 
+variable "unique_suffix_int" {
+  default     = 1337
+  description = "Resource int suffix to guarantee global uniqueness."
+}
+
+variable "unique_suffix_string" {
+  default     = "abracadabra"
+  description = "Resource string suffix to guarantee global uniqueness."
+}
+
 variable "resource_environment" {
   default     = "dev"
   description = "Environment of the resource."

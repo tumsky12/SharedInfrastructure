@@ -10,7 +10,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/tags/1.0.3
+      ref: refs/heads/feature/support-env-and-infa-plan-options
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
@@ -31,6 +31,7 @@ extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
     destroy: false
+    planAdditionalOptions: -var="unique_suffix_int=$(uniqueSuffixInt)" -var="unique_suffix_string=$(uniqueSuffixString)"
     environments:
       - envName: dev
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
@@ -61,4 +62,3 @@ extends:
         deployOn: [dev, stg, prd]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
         backendAzureRmContainerName: core-infrastructure
-            
