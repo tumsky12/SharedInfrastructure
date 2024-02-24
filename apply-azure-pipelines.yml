@@ -10,7 +10,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/heads/feature/multiple-env-and-infra
+      ref: refs/tags/1.0.3
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
