@@ -1,4 +1,8 @@
-trigger: none
+trigger:
+- main
+
+pr:
+- main
 
 resources:
   repositories:
@@ -33,14 +37,14 @@ extends:
         backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
         tfVarsFile: ${{ variables.devTfVarsFile }}
 
-      - envName: stg
-        dependsOn: dev
-        backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
-        backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
-        tfVarsFile: ${{ variables.stgTfVarsFile }}
+      # - envName: stg
+      #   dependsOn: dev
+      #   backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
+      #   backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
+      #   tfVarsFile: ${{ variables.stgTfVarsFile }}
 
       - envName: prd
-        dependsOn: stg
+        dependsOn: dev
         backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
         backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
         tfVarsFile: ${{ variables.prdTfVarsFile }}
@@ -48,7 +52,7 @@ extends:
     infrastructureGroups:
       - infrastructureName: SharedInfrastructure
         dependsOn: []
-        deployOn: [dev, stg, prd]
+        deployOn: [dev]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmContainerName: shared-infrastructure
 
