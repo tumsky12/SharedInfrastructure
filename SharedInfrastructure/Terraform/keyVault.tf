@@ -5,7 +5,7 @@ module "kv" {
   resource_group_name     = azurerm_resource_group.rg.name
   resource_name           = "kv"
   resource_environment    = var.resource_environment
-  key_vault_suffix        = random_integer.random.result
+  key_vault_suffix        = var.unique_suffix_int
 }
 
 resource "azurerm_key_vault_secret" "kvs_cr_login_server" {
