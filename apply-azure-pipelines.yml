@@ -10,7 +10,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/heads/feature/support-env-and-infa-plan-options
+      ref: refs/tags/1.0.4
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
