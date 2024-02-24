@@ -8,7 +8,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/heads/feature/multiple-env-and-infra
+      ref: refs/tags/1.0.4
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
@@ -29,6 +29,7 @@ extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
     destroy: true
+    planAdditionalOptions: -var="unique_suffix_int=$(uniqueSuffixInt)" -var="unique_suffix_string=$(uniqueSuffixString)"
     environments:
       - envName: dev
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
