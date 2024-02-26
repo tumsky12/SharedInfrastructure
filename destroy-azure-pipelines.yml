@@ -29,6 +29,7 @@ extends:
   template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
   parameters:
     destroy: true
+    planAdditionalOptions: -var="unique_suffix_int=$(uniqueSuffixInt)" -var="unique_suffix_string=$(uniqueSuffixString)"
     environments:
       - envName: dev
         backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
