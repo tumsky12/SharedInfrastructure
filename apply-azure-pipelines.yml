@@ -62,3 +62,9 @@ extends:
         deployOn: [dev, stg, prd]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
         backendAzureRmContainerName: core-infrastructure
+
+      - infrastructureName: KubernetesInfrastructure
+        dependsOn: [SharedInfrastructure]
+        deployOn: [dev]
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/KubernetesInfrastructure/Terraform
+        backendAzureRmContainerName: kub-infrastructure
