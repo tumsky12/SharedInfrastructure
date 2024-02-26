@@ -33,6 +33,6 @@ variable "container_registry_resource_prefix" {
 }
 
 variable "Default_node_pool_vm_size" {
-  default     = "Standard_B1ms"
+  default     = "Standard_B2s"
   description = "The default node pool size for the cluster."
 }

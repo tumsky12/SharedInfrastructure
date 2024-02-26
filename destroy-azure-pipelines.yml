@@ -8,7 +8,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/heads/feature/multiple-env-and-infra
+      ref: refs/heads/feature/infra-depends-on
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
@@ -48,17 +48,17 @@ extends:
         tfVarsFile: ${{ variables.prdTfVarsFile }}
 
     infrastructureGroups:
-      - infrastructureName: SharedInfrastructure
-        dependsOn: []
-        deployOn: [dev, stg, prd]
-        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
-        backendAzureRmContainerName: shared-infrastructure
-
       - infrastructureName: CoreInfrastructure
         dependsOn: []
         deployOn: [dev, stg, prd]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
         backendAzureRmContainerName: core-infrastructure
+
+      - infrastructureName: SharedInfrastructure
+        dependsOn: [CoreInfrastructure]
+        deployOn: [dev]
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+        backendAzureRmContainerName: shared-infrastructure
 
       - infrastructureName: KubernetesInfrastructure
         dependsOn: [SharedInfrastructure]
