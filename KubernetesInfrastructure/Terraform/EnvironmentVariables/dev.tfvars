@@ -3,4 +3,6 @@
 resource_group_location   = "uksouth"
 resource_prefix           = "kubs"
 resource_environment      = "dev"
-Default_node_pool_vm_size = "Standard_B2s"
+default_node_pool_vm_size = "Standard_B2s"
+kubernetes_sku_tier       = "Free"
+default_node_pool_name    = "system"

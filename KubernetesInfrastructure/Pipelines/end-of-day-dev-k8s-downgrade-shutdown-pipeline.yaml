@@ -1,0 +1,38 @@
+trigger: none
+
+pr: none
+
+schedules:
+- cron: '0 2,4 * * *'
+  displayName: Daily downgrade and shutdown at 2:00 and 4:00
+  branches:
+    include:
+    - main
+  always: true
+- cron: '0 0 * * 1-5'
+  displayName: Weekday early downgrade and shutdown at midnight
+  branches:
+    include:
+    - main
+  always: true
+
+variables:
+- group: shared-variable-group
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Downgrade Dev K8s VMSS Node Pools'
+  continueOnError: true
+  inputs:
+    azureSubscription: $(environmentServiceName)
+    scriptType: 'pscore'
+    scriptLocation: 'scriptPath'
+    scriptPath: './scripts/DowngradeDevNodePoolVMSS.ps1'
+- task: AzureCLI@2
+  displayName: 'Stop Dev K8s Clusters'
+  continueOnError: true
+  inputs:
+    azureSubscription: $(environmentServiceName)
+    scriptType: 'pscore'
+    scriptLocation: 'scriptPath'
+    scriptPath: './scripts/StopDevK8s.ps1'

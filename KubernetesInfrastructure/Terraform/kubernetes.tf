@@ -4,11 +4,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = "${var.resource_prefix}-k8s"
   node_resource_group = "rg-${var.resource_prefix}-infra-${var.resource_environment}"
+  sku_tier            = var.kubernetes_sku_tier
 
   default_node_pool {
-    name            = "system"
+    name            = var.default_node_pool_name
     node_count      = 1
-    vm_size         = var.Default_node_pool_vm_size
+    vm_size         = var.default_node_pool_vm_size
     os_disk_size_gb = 30
   }
 

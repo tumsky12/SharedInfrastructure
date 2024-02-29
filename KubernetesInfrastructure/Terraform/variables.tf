@@ -32,7 +32,25 @@ variable "container_registry_resource_prefix" {
   description = "Prefix of the container registry resource"
 }
 
-variable "Default_node_pool_vm_size" {
+variable "default_node_pool_vm_size" {
   default     = "Standard_B2s"
   description = "The default node pool size for the cluster."
+}
+
+variable "default_node_pool_name" {
+  default     = "system"
+  description = "The name of the default node pool."
+  validation {
+    condition     = contains(["system", "default"], var.default_node_pool_name)
+    error_message = "The name of the default node pool must be 'system' or 'default'."
+  }
+}
+
+variable "kubernetes_sku_tier" {
+  default     = "Free"
+  description = "The sku tier for the kubernetes cluster."
+  validation {
+    condition     = contains(["Free", "Standard", "Premium"], var.kubernetes_sku_tier)
+    error_message = "The sku tier must be either 'Free', 'Standard' or 'Premium'."
+  }
 }

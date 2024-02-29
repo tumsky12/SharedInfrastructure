@@ -56,13 +56,13 @@ extends:
         backendAzureRmContainerName: core-infrastructure
 
       - infrastructureName: SharedInfrastructure
-        dependsOn: [CoreInfrastructure]
+        dependsOn: [KubernetesInfrastructure]
         deployOn: [dev]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmContainerName: shared-infrastructure
 
       - infrastructureName: KubernetesInfrastructure
-        dependsOn: [SharedInfrastructure]
+        dependsOn: []
         deployOn: [dev]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/KubernetesInfrastructure/Terraform
         backendAzureRmContainerName: kub-infrastructure
