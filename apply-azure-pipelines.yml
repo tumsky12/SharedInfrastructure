@@ -10,7 +10,7 @@ resources:
       type: github
       name: tumsky12/CorePipelineTemplates
       endpoint: GitHubConnection
-      ref: refs/tags/1.0.4
+      ref: refs/tags/1.0.6
     - repository: terraformModules
       type: github
       name: tumsky12/CoreTerraformModules
@@ -51,14 +51,20 @@ extends:
         tfVarsFile: ${{ variables.prdTfVarsFile }}
 
     infrastructureGroups:
+      - infrastructureName: CoreInfrastructure
+        dependsOn: []
+        deployOn: [dev, stg, prd]
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
+        backendAzureRmContainerName: core-infrastructure
+
       - infrastructureName: SharedInfrastructure
         dependsOn: []
         deployOn: [dev]
         workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
         backendAzureRmContainerName: shared-infrastructure
 
-      - infrastructureName: CoreInfrastructure
-        dependsOn: []
-        deployOn: [dev, stg, prd]
-        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
-        backendAzureRmContainerName: core-infrastructure
+      - infrastructureName: KubernetesInfrastructure
+        dependsOn: [SharedInfrastructure]
+        deployOn: [dev]
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/KubernetesInfrastructure/Terraform
+        backendAzureRmContainerName: kub-infrastructure
