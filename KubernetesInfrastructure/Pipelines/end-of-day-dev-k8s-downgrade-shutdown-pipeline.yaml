@@ -27,7 +27,7 @@ steps:
     azureSubscription: $(environmentServiceName)
     scriptType: 'pscore'
     scriptLocation: 'scriptPath'
-    scriptPath: './scripts/DowngradeDevNodePoolVMSS.ps1'
+    scriptPath: '../Scripts/DowngradeDevNodePoolVMSS.ps1'
 - task: AzureCLI@2
   displayName: 'Stop Dev K8s Clusters'
   continueOnError: true
@@ -35,4 +35,4 @@ steps:
     azureSubscription: $(environmentServiceName)
     scriptType: 'pscore'
     scriptLocation: 'scriptPath'
-    scriptPath: './scripts/StopDevK8s.ps1'
+    scriptPath: '../Scripts/StopDevK8s.ps1'
