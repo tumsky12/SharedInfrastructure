@@ -1,5 +1,5 @@
 $downgradeSKU = "Standard_B1ms"
-$lowerSKUs = "Standard_B1ls", "Standard_B1s"
+$ignoreSKUs = "Standard_B1ls", "Standard_B1s", $downgradeSKU
 
 $instances = az aks list | ConvertFrom-Json
 [array]$activeDevInstances = $instances | Where-Object { $_.tags.Environment.ToLower() -eq "dev" }
@@ -12,7 +12,7 @@ foreach ($instance in $activeDevInstances) {
     [array]$instanceVMScaleSets = $systemVMScaleSets | Where-Object { $_.resourceGroup -eq $nodeResourceGroup }
     foreach ($scaleSet in $instanceVMScaleSets) {
         $scaleSetSku = $scaleSet.sku.name
-        if ($scaleSetSku -notin $lowerSKUs) {
+        if ($scaleSetSku -notin $ignoreSKUs) {
             Write-Output "Attempting to downgrade $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
             az vmss update --name $scaleSet.name --resource-group $scaleSet.resourceGroup --vm-sku $downgradeSKU
             $details = az vmss show --name $scaleSet.name --resource-group $scaleSet.resourceGroup | ConvertFrom-Json
