@@ -18,10 +18,10 @@ foreach ($instance in $activeDevInstances) {
             $details = az vmss show --name $scaleSet.name --resource-group $scaleSet.resourceGroup | ConvertFrom-Json
             $isDowngraded = $details.sku.name -eq $downgradeSKU
             if ($isDowngraded) {
-                Write-Output "Successfully downgradede $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
+                Write-Output "Successfully downgraded $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
             }
             else {
-                Write-Error "Failed to downgradede $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
+                Write-Error "Failed to downgraded $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
                 $failCount++
             }
         }
