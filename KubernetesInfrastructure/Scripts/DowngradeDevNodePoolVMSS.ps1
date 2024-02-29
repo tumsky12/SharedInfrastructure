@@ -13,12 +13,12 @@ foreach ($instance in $activeDevInstances) {
     foreach ($scaleSet in $instanceVMScaleSets) {
         $scaleSetSku = $scaleSet.sku.name
         if ($scaleSetSku -notin $lowerSKUs) {
-            Write-Information "Attempting to downgrade $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
+            Write-Output "Attempting to downgrade $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
             az vmss update --name $scaleSet.name --resource-group $scaleSet.resourceGroup --vm-sku $downgradeSKU
             $details = az vmss show --name $scaleSet.name --resource-group $scaleSet.resourceGroup | ConvertFrom-Json
             $isDowngraded = $details.sku.name -eq $downgradeSKU
             if ($isDowngraded) {
-                Write-Information "Successfully downgradede $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
+                Write-Output "Successfully downgradede $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
             }
             else {
                 Write-Error "Failed to downgradede $($scaleSet.name) rg $($scaleSet.resourceGroup) to $($downgradeSKU)."
