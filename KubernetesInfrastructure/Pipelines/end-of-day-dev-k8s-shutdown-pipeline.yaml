@@ -1,0 +1,30 @@
+trigger: none
+
+pr: none
+
+schedules:
+  - cron: "30 2,4 * * *"
+    displayName: Daily shutdown at 2:30 and 4:30
+    branches:
+      include:
+        - main
+    always: true
+  - cron: 30 0 * * 1-5"
+    displayName: Weekday early shutdown at 00:30
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  - group: shared-variable-group
+
+steps:
+  - task: AzureCLI@2
+    displayName: "Stop Dev K8s Clusters"
+    continueOnError: true
+    inputs:
+      azureSubscription: $(environmentServiceName)
+      scriptType: "pscore"
+      scriptLocation: "scriptPath"
+      scriptPath: $(System.DefaultWorkingDirectory)/KubernetesInfrastructure/Scripts/StopDevK8s.ps1

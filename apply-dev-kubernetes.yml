@@ -1,0 +1,70 @@
+trigger:
+  - main
+
+pr:
+  - main
+
+resources:
+  repositories:
+    - repository: corePipelineTemplates
+      type: github
+      name: tumsky12/CorePipelineTemplates
+      endpoint: GitHubConnection
+      ref: refs/tags/1.0.6
+    - repository: terraformModules
+      type: github
+      name: tumsky12/CoreTerraformModules
+      endpoint: GitHubConnection
+      ref: refs/tags/1.0.2
+
+variables:
+  - group: shared-variable-group
+
+  - name: devTfVarsFile
+    value: dev.tfvars
+  - name: stgTfVarsFile
+    value: stg.tfvars
+  - name: prdTfVarsFile
+    value: prd.tfvars
+
+extends:
+  template: Templates/Stages/Terraform/terraform-apply-envs-stage.yml@corePipelineTemplates
+  parameters:
+    destroy: false
+    planAdditionalOptions: -var="unique_suffix_int=$(uniqueSuffixInt)" -var="unique_suffix_string=$(uniqueSuffixString)"
+    environments:
+      - envName: dev
+        backendAzureRmResourceGroupName: $(devBackendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(devBackendAzureRmStorageAccountName)
+        tfVarsFile: ${{ variables.devTfVarsFile }}
+
+      # - envName: stg
+      #   dependsOn: dev
+      #   backendAzureRmResourceGroupName: $(stgBackendAzureRmResourceGroupName)
+      #   backendAzureRmStorageAccountName: $(stgBackendAzureRmStorageAccountName)
+      #   tfVarsFile: ${{ variables.stgTfVarsFile }}
+
+      # - envName: prd
+      #   dependsOn: dev
+      #   backendAzureRmResourceGroupName: $(prdBackendAzureRmResourceGroupName)
+      #   backendAzureRmStorageAccountName: $(prdBackendAzureRmStorageAccountName)
+      #   tfVarsFile: ${{ variables.prdTfVarsFile }}
+
+    infrastructureGroups:
+      # - infrastructureName: CoreInfrastructure
+      #   dependsOn: []
+      #   deployOn: [dev, stg, prd]
+      #   workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/CoreInfrastructure/Terraform
+      #   backendAzureRmContainerName: core-infrastructure
+
+      # - infrastructureName: SharedInfrastructure
+      #   dependsOn: []
+      #   deployOn: [dev]
+      #   workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/SharedInfrastructure/Terraform
+      #   backendAzureRmContainerName: shared-infrastructure
+
+      - infrastructureName: KubernetesInfrastructure
+        dependsOn: [SharedInfrastructure]
+        deployOn: [dev]
+        workingDirectory: $(System.DefaultWorkingDirectory)/SharedInfrastructure/KubernetesInfrastructure/Terraform
+        backendAzureRmContainerName: kub-infrastructure
