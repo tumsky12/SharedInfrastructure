@@ -1,0 +1,30 @@
+trigger: none
+
+pr: none
+
+schedules:
+  - cron: "0 2,4 * * *"
+    displayName: Daily downgrade at 2:00 and 4:00
+    branches:
+      include:
+        - main
+    always: true
+  - cron: "0 0 * * 1-5"
+    displayName: Weekday early downgrade at midnight
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  - group: shared-variable-group
+
+steps:
+  - task: AzureCLI@2
+    displayName: "Downgrade Dev K8s VMSS Node Pools"
+    continueOnError: true
+    inputs:
+      azureSubscription: $(environmentServiceName)
+      scriptType: "pscore"
+      scriptLocation: "scriptPath"
+      scriptPath: $(System.DefaultWorkingDirectory)/KubernetesInfrastructure/Scripts/DowngradeDevNodePoolVMSS.ps1

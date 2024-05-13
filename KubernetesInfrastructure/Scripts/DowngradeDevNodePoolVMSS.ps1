@@ -6,7 +6,6 @@ $instances = az aks list | ConvertFrom-Json
 $allVmsss = az vmss list | ConvertFrom-Json
 [array]$systemVMScaleSets = $allVmsss | Where-Object { $_.tags."aks-managed-poolName".ToLower() -in ("system", "default") -and $_sku.name -ne $downgradeSKU }
 
-
 foreach ($instance in $activeDevInstances) {
     $nodeResourceGroup = $instance.nodeResourceGroup
     [array]$instanceVMScaleSets = $systemVMScaleSets | Where-Object { $_.resourceGroup -eq $nodeResourceGroup }
